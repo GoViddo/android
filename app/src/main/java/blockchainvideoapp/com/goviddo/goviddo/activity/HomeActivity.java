@@ -14,7 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 
@@ -33,6 +37,7 @@ public class HomeActivity extends AppCompatActivity  {
     Toolbar toolbar;
     FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -53,13 +58,13 @@ public class HomeActivity extends AppCompatActivity  {
                     transaction.commit();
                     return true;
                 case R.id.navigation_recent:
-                    RecentFragment recentFragment = new RecentFragment();
-                    transaction.replace( R.id.fragment_container,recentFragment );
+                    HomeFragment homeFragment1 = new HomeFragment();
+                    transaction.replace( R.id.fragment_container,homeFragment1 );
                     transaction.commit();
                     return true;
                 case R.id.navigation_more:
-                    OthersFragment othersFragment = new OthersFragment();
-                    transaction.replace( R.id.fragment_container,othersFragment );
+                    RecentFragment recentFragment = new RecentFragment();
+                    transaction.replace( R.id.fragment_container,recentFragment );
                     transaction.commit();
                     return true;
             }
@@ -87,6 +92,8 @@ public class HomeActivity extends AppCompatActivity  {
 
 
     }
+
+
 }
 
 

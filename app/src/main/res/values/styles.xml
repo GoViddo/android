@@ -65,7 +65,7 @@
     <style name="BottomNavigation">
         <item name="android:background">@color/backgroundColorNormalTabLayout</item>
         <item name="itemBackground">@drawable/navigation_bar_item_bg</item>
-        <item name="itemIconTint">@color/colorPrimary</item>
+        <item name="itemIconTint">@android:color/white</item>
         <item name="itemTextColor">@android:color/white</item>
         <item name="paddingStart">@dimen/fab_margin</item>
         <item name="paddingEnd">@dimen/fab_margin</item>

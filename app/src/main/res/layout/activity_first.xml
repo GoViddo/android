@@ -22,6 +22,7 @@
             android:minHeight="?attr/actionBarSize"
             android:paddingLeft="@dimen/fab_margin"
             app:logo="@drawable/app_logo"
+            app:menu="@menu/menu_home"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
         </android.support.v7.widget.Toolbar>
