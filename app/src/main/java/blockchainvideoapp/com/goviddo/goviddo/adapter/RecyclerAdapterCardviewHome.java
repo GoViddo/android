@@ -53,13 +53,6 @@ public class RecyclerAdapterCardviewHome extends RecyclerView.Adapter<RecyclerAd
     ArrayList<HomeRecyclerCardViewModel> mRecyclerModelsVideo, mRecyclerModelsVideoGoViddoOriginals, mRecyclerModelsVideoGoViddoDrama, mRecyclerModelsVideoGoViddoRomantic;;
     LinearLayoutManager mLinearLayoutManagerVideo;
 
-
-
-
-
-    String url1 ="https://pngimage.net/genie-aladdin-png-6/";
-
-
     public RecyclerAdapterCardviewHome(ArrayList<HomeRecyclerCardViewModel> recyclerModels) {
         this.mHomeRecyclerModels = recyclerModels;
 
@@ -72,12 +65,6 @@ public class RecyclerAdapterCardviewHome extends RecyclerView.Adapter<RecyclerAd
         View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.home_video, parent, false );
 
         final MyViewHolder mViewHolder = new MyViewHolder( view );
-
-
-
-
-
-
         // inflate your custom row layout here
         return mViewHolder;
     }
@@ -168,15 +155,10 @@ public class RecyclerAdapterCardviewHome extends RecyclerView.Adapter<RecyclerAd
 
 
     }
-
-
-
     // this function will load 15 items as indicated in the LOAD_LIMIT variable field
     private void firstLoadData(final Context context, String videoGenere, int videoLimit, int videoLastId, final ArrayList<HomeRecyclerCardViewModel> recyclerCardViewModelGoVidoDrama, final ArrayList<HomeRecyclerCardViewModel> recyclerCardViewModelGoViddoRomantic, final RecyclerAdapterVideosHome home_video_adapter, final String type, final RecyclerView recyclerView) {
 
         String url = "http://178.128.173.51:3000/getVideoData";
-        System.out.println(url);
-
 
         JSONObject params = new JSONObject();
         try {
@@ -211,7 +193,6 @@ public class RecyclerAdapterCardviewHome extends RecyclerView.Adapter<RecyclerAd
                 //volley has finished processing request, and we have our response.
                 // What else are you waiting for? update itShouldLoadMore = true;
                 itShouldLoadMore = true;
-                System.out.println(response.toString());
 
                 try {
 

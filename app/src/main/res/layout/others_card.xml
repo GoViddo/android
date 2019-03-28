@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:layout_marginBottom="2dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/othersCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="12dp"
-    android:id="@+id/othersCard"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardPreventCornerOverlap="false"
-    xmlns:wheel="http://schemas.android.com/tools"
     android:layout_centerHorizontal="true"
-    android:thicknessRatio="1.9"
-    android:layout_margin="2dp">
+    android:layout_margin="1dp"
+    android:elevation="12dp"
+    android:thicknessRatio="1"
+    app:cardPreventCornerOverlap="false">
 
-
-    <TextView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <TextView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/txtTitle"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/fab_margin"
+        android:paddingLeft="@dimen/text_margin_left"
+        android:text="text"
+        android:textColor="@color/changeTextColor"
         android:textSize="@dimen/normal_text_size"
-        android:textColor="#FF000000"
-        android:layout_alignParentTop="true" />
+        android:textStyle="bold" />
 
 </android.support.v7.widget.CardView>

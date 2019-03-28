@@ -13,8 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import blockchainvideoapp.com.goviddo.goviddo.Fragments.RecyclerRecentFragment;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.RecentRecyclerModel;
 
@@ -41,19 +39,14 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
 
        mViewHolder.textView.setText( mRecentRecyclerModels.get( mPosition ).getMtext() );
 
-        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        mViewHolder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mViewHolder.context, mRecentRecyclerModels.get(mViewHolder.getPosition()).getMtext(), Toast.LENGTH_SHORT).show();
 
-
+                             //Click listener
 
             }
         });
-
-
-
-
 
 
         // inflate your custom row layout here
@@ -76,7 +69,6 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
     class MyViewHolder extends RecyclerView.ViewHolder {
         // view this our others_card layout, so intialize your variables here
 
-        CardView cardView;
         TextView textView;
         Context context;
 
@@ -86,7 +78,7 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
 
             textView = view.findViewById( R.id.txt_view_list );
             context = view.getContext();
-            cardView = view.findViewById(R.id.list_card_view);
+
 
         }
 

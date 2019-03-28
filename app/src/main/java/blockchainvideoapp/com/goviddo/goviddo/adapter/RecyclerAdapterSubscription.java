@@ -35,10 +35,10 @@ public class RecyclerAdapterSubscription extends RecyclerView.Adapter<RecyclerAd
         final RecyclerAdapterSubscription.MyViewHolder mViewHolder = new RecyclerAdapterSubscription.MyViewHolder(view);
 
 
-        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        mViewHolder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mViewHolder.context, mSubscriptionrecyclerModels.get(mViewHolder.getPosition()).getmTitle(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -77,7 +77,6 @@ public class RecyclerAdapterSubscription extends RecyclerView.Adapter<RecyclerAd
             roundedImageView = view.findViewById(R.id.subscribe_img);
             context = view.getContext();
             title = view.findViewById( R.id.txtSubscribeTitle );
-            cardView = view.findViewById(R.id.Subscription_card);
 
         }
 

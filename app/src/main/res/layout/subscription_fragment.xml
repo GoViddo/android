@@ -2,15 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollview"
         android:orientation="vertical"
         android:scrollbars="vertical">
 
@@ -19,30 +17,31 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/subscribe"
-        android:text="Subscribed Production Houses"
-        android:textSize="@dimen/normal_text_size"/>
+            <TextView
+                android:id="@+id/subscribe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/five_dp"
+                android:text="Subscribed Production Houses"
+                android:textColor="@color/changeTextColor"
+                android:textSize="@dimen/xsmall_text_size"
+                android:textStyle="bold" />
 
-       <android.support.v7.widget.RecyclerView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/recycle_subscribe_roundimg"
-           android:scrollbars="none"
-           android:orientation="horizontal">
-       </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_subscribe_roundimg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="none" />
 
-       <android.support.v7.widget.RecyclerView
-           android:layout_width="match_parent"
-           android:id="@+id/recycle_subscribe_cardvideo"
-           android:layout_height="wrap_content"
-           android:scrollbars="none"
-           android:orientation="vertical"
-           android:nestedScrollingEnabled="false">
-       </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_subscribe_cardvideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:scrollbars="none" />
         </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

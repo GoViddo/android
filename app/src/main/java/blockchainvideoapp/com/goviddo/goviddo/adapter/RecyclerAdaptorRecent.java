@@ -35,20 +35,12 @@ public class RecyclerAdaptorRecent extends RecyclerView.Adapter<RecyclerAdaptorR
 
         final RecyclerAdaptorRecent.MyViewHolder mViewHolder = new RecyclerAdaptorRecent.MyViewHolder(view);
 
-       // mViewHolder.textView.setText( recyclerModels.get( mPosition ).getmText() );
-
-        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        mViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mViewHolder.context, mRecentRecyclerModels.get(mViewHolder.getPosition()).getmTextFirst(), Toast.LENGTH_SHORT).show();
+               //Click Listener
             }
         });
-
-
-
-
-
-
         // inflate your custom row layout here
         return mViewHolder;
     }
@@ -56,7 +48,6 @@ public class RecyclerAdaptorRecent extends RecyclerView.Adapter<RecyclerAdaptorR
     @Override
     public void onBindViewHolder(final RecyclerAdaptorRecent.MyViewHolder holder, int position) {
         mPosition = position;
-       // holder.textView.setText(recyclerModels.get( mPosition ).getmText()  );
 
     }
 
@@ -69,7 +60,6 @@ public class RecyclerAdaptorRecent extends RecyclerView.Adapter<RecyclerAdaptorR
     class MyViewHolder extends RecyclerView.ViewHolder {
         // view this our others_card layout, so intialize your variables here
 
-        CardView cardView;
         ImageView imageView;
 
         Context context;
@@ -80,7 +70,6 @@ public class RecyclerAdaptorRecent extends RecyclerView.Adapter<RecyclerAdaptorR
 
             imageView = view.findViewById( R.id.image_view_image );
             context = view.getContext();
-            cardView = view.findViewById(R.id.image_card_view);
 
         }
 

@@ -10,7 +10,9 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_add">Add Movie</string>
+    <string name="action_notification">Notification</string>
 
 
     <string name="action_sort_by_date">Sort By Date</string>
@@ -19,5 +21,13 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="Setting">Setting</string>
     <string name="Signout">Sign Out</string>
+    <string name="title_activity_first">FirstActivity</string>
+    <string name="title_home"><font size="10">Home</font></string>
+    <string name="title_subscription"><font size="10">Subscription</font></string>
+    <string name="title_recent"><font size="10">Recent</font></string>
+    <string name="title_more"><font size="10">More</font></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

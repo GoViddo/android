@@ -42,7 +42,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
         final MyViewHolder mViewHolder = new MyViewHolder(view);
 
 
-        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        mViewHolder.roundedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(  mViewHolder.context, OnlinePlayerActivity.class );
@@ -74,9 +74,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        // view this our custom row layout, so intialize your variables here
-
-        CardView cardView;
+        // view this our custom row layout, so intialize your variables her
         ImageView roundedImageView;
 
         Context context;
@@ -87,7 +85,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
 
             roundedImageView = view.findViewById(R.id.title);
             context = view.getContext();
-            cardView = view.findViewById(R.id.cardViewSingleItem);
+
 
 
         }

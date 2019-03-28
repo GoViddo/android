@@ -121,103 +121,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         mRecyclerCardview =  view.findViewById(R.id.home_video_recycler);
 
-
-        final SwipeRefreshLayout swipeRefreshLayout=view.findViewById(R.id.refreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
-        {
-            @Override
-            public void onRefresh()
-            {
-
-                mRecyclerModelsCardview = new ArrayList<>();
-
-                mRecyclerAdapterCardview = new RecyclerAdapterCardviewHome(mRecyclerModelsCardview);
-
-                String configuration_url = "http://178.128.173.51:3000/config";
-
-
-
-                final RequestQueue requestQueue = Volley.newRequestQueue( getActivity() );
-                final RequestQueue requestQueueForBannerImages = Volley.newRequestQueue(getActivity());
-
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, configuration_url,  new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-
-                            String bannerIimageCount = response.getString( "bannerImgCount" );
-                            String previewListMaxLimit = response.getString("previewCount");
-
-
-                            String categories = response.getString( "categories" );
-                            String[] aa = categories.split( "\\:",-1 );
-                            ArrayList<String> pushdata = new ArrayList<>(  );
-                            for (int i=1; i<aa.length; i++)
-                            {
-
-                                if(i%2 == 1)
-                                {
-                                    String[] namearr = aa[i].split( ",", -1 );
-                                    String namedisp = namearr[0].replaceAll( "\\'" ,"");
-
-                                    //System.out.println(namedisp);
-                                    pushdata.add( namedisp );
-                                }
-                                else{
-                                    String[] countarr = aa[i].split( "\\}", -1 );
-                                    String countdisp = countarr[0];
-                                    //System.out.println(countdisp);
-                                    pushdata.add( countdisp );
-                                }
-
-                            }
-
-                            for (int i=0; i<pushdata.size(); i++)
-                            {
-                                if(i%2 == 0) {
-                                    mRecyclerModelsCardview.add( new HomeRecyclerCardViewModel( pushdata.get( i ), Integer.parseInt( pushdata.get( i + 1 ) ) ) );
-                                }
-                            }
-
-
-
-                            mRecyclerAdapterCardview = new RecyclerAdapterCardviewHome(mRecyclerModelsCardview);
-
-
-                            mLayoutManagerCardview= new LinearLayoutManager( getActivity(), LinearLayoutManager.VERTICAL, false );
-
-                            mRecyclerCardview.setLayoutManager( mLayoutManagerCardview );
-
-                            //we can now set adapter to recyclerView;
-                            mRecyclerCardview.setAdapter( mRecyclerAdapterCardview );
-                            mRecyclerAdapterCardview.notifyDataSetChanged();
-                              swipeRefreshLayout.setRefreshing(false);
-
-                              //System.out.println(categories.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText( getActivity(), "Network Error Home Fragment", Toast.LENGTH_SHORT ).show();
-
-                    }
-                } );
-
-                requestQueue.add( jsonObjectRequest );
-
-
-            }
-        });
-
-
-
-
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
         mRecyclerViewPreview.setLayoutManager(mLayoutManager);
@@ -249,17 +152,12 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
                     JSONObject bannerImageRequestData = new JSONObject();
                     bannerImageRequestData.put("sliderMaxCount", bannerIimageCount);
-                    System.out.println(bannerImageRequestData.toString());
-
 
                     firstLoadData();
-
-
 
                     mRecyclerViewPreview.addOnScrollListener(new EndlessRecyclerViewScrollListner( mLayoutManager) {
                         @Override
                         public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                            //  Toast.makeText(getActivity(),"LAst",Toast.LENGTH_LONG).show();
                             loadMore();
                         }
                     });
@@ -269,9 +167,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                         @Override
                         public void onResponse(JSONObject response) {
                             url_maps = new HashMap<String, String>();
-
-
-                            System.out.println(response.toString());
+                            //System.out.println(response.toString());
 
                             try {
                                 String message = response.getString("message");
@@ -285,7 +181,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                                     {
 
                                         JSONObject jsonObjectSingleImageData = jsonArrayBannerImageData.getJSONObject(i);
-                                        System.out.println(jsonArrayBannerImageData.toString());
                                         String imageUrl = jsonObjectSingleImageData.getString("slider_image");
                                         int videoId = jsonObjectSingleImageData.getInt("video_id");
                                         String videocipher_id = jsonObjectSingleImageData.getString("vdo_cipher_id" );
@@ -306,6 +201,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                             for(String name : url_maps.keySet()){
                                 TextSliderView textSliderView = new TextSliderView(getActivity());
                                 // initialize a SliderLayout
+                              //  System.out.println(url_maps.size());
                                 textSliderView
                                         .image(url_maps.get(name))
                                         .setScaleType(BaseSliderView.ScaleType.Fit)
@@ -362,14 +258,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                             {
                                 String[] namearr = aa[i].split( ",", -1 );
                                 String namedisp = namearr[0].replaceAll( "\\'" ,"");
-
-                                //System.out.println(namedisp);
                                 pushdata.add( namedisp );
                             }
                             else{
                                 String[] countarr = aa[i].split( "\\}", -1 );
                                 String countdisp = countarr[0];
-                                //System.out.println(countdisp);
                                 pushdata.add( countdisp );
                             }
 
@@ -378,8 +271,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                     for (int i=0; i<pushdata.size(); i++)
                     {
                         if(i%2 == 0) {
-                            Toast.makeText( getContext(),  pushdata.get( i ), Toast.LENGTH_SHORT ).show();
-                            System.out.println( pushdata.get( i ));
                             mRecyclerModelsCardview.add( new HomeRecyclerCardViewModel( pushdata.get( i ), Integer.parseInt( pushdata.get( i + 1 ) ) ) );
                         }
                     }
@@ -397,10 +288,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                     mRecyclerCardview.setAdapter( mRecyclerAdapterCardview );
                     mRecyclerAdapterCardview.notifyDataSetChanged();
 
-
-
-
-                    //System.out.println(categories.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -450,19 +337,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public void onPageScrollStateChanged(int state) {}
 
 
-
-
-
-
-
-
-
-
     // this function will load 15 items as indicated in the LOAD_LIMIT variable field
     private void firstLoadData() {
 
         String url = "http://178.128.173.51:3000/getPreviewData";
-        //System.out.println(url);
 
         JSONObject params = new JSONObject();
         try {
@@ -477,7 +355,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         }
 
-        System.out.println(params.toString());
         itShouldLoadMore = false; // lock this guy,(itShouldLoadMore) to make sure,
         // user will not load more when volley is processing another request
         // only load more when  volley is free
@@ -493,7 +370,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                System.out.println(response.toString());
+
                 progressDialog.dismiss();
                 // remember here we are in the main thread, that means,
                 //volley has finished processing request, and we have our response.
@@ -511,10 +388,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
                         int videoId = jsonObject.getInt("video_id");
 
-                        if (i==0)
-                        {
+
                             lastId = String.valueOf(videoId);
-                        }
+
 
                         String sliderImage = jsonObject.getString("slider_image");
                         String shortenText = jsonObject.getString("shorten_text");
@@ -578,7 +454,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             e.printStackTrace();
 
         }
-        Toast.makeText( getContext(), params.toString(), Toast.LENGTH_SHORT ).show();
         // our php page starts loading from 250 to 1, because we have [ORDER BY id DESC]
         // So until you clearly understand everything, for this tutorial use ORDER BY ID DESC
         // so we will do something like this to the php page
@@ -599,42 +474,44 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
        // mProgressWheelPreview.setVisibility(View.VISIBLE);
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
+
+        final JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
-               // mProgressWheelPreview.setVisibility(View.GONE);
+            public void onResponse(JSONObject response) {
 
-                // since volley has completed and it has our response, now let's update
-                // itShouldLoadMore
-
+                // remember here we are in the main thread, that means,
+                //volley has finished processing request, and we have our response.
+                // What else are you waiting for? update itShouldLoadMore = true;
                 itShouldLoadMore = true;
 
-                if (response.length() <= 0) {
-                    // we need to check this, to make sure, our dataStructure JSonArray contains
-                    // something
-                    Toast.makeText(getActivity(), "no data available", Toast.LENGTH_SHORT).show();
-                    return; // return will end the program at this point
-                }
+                try {
 
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
 
-                        // please note how we have updated the lastId variable
-                        // if there are 4 items for example, and we are ordering in descending order,
-                        // then last id will be 1. This is because outside a loop, we will get the last
-                        // value
+                    String msg = response.getString("message");
+                    JSONArray data = response.getJSONArray("data");
+                    for (int i=0; i<data.length(); i++)
+                    {
+                        JSONObject jsonObject = data.getJSONObject(i);
 
-                        lastId = jsonObject.getString("id");
-                        String title = jsonObject.getString("title");
-                        String description = jsonObject.getString("description");
+                        int videoId = jsonObject.getInt("video_id");
 
-                        mHomeRecyclerModelsPreview.add(new HomeRecyclerModel(title, description));
+
+                        lastId = String.valueOf(videoId);
+
+
+                        String sliderImage = jsonObject.getString("slider_image");
+                        String shortenText = jsonObject.getString("shorten_text");
+                        String vdoCipherId = jsonObject.getString("vdo_cipher_id");
+
+                        mHomeRecyclerModelsPreview.add(new HomeRecyclerModel(videoId, sliderImage, shortenText, vdoCipherId));
+
+
+
                         mRecyclerAdapterHomePreview.notifyDataSetChanged();
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -644,7 +521,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 mProgressWheelPreview.setVisibility(View.GONE);
                 // volley finished and returned network error, update and unlock  itShouldLoadMore
                 itShouldLoadMore = true;
-                // Toast.makeText(getActivity(), "Failed to load more, network error", Toast.LENGTH_SHORT).show();
 
             }
         });

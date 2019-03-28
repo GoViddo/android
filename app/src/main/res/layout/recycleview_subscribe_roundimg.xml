@@ -1,42 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/subscribe_img"
+        android:layout_width="@dimen/sub_video_width"
+        android:layout_height="@dimen/sub_video_height"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:src="@drawable/logo_splash1"
+        app:civ_border_color="@color/border"
+        app:civ_border_width="1dp" />
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="12dp"
-        android:id="@+id/Subscription_card"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardPreventCornerOverlap="false"
-        xmlns:wheel="http://schemas.android.com/tools"
-        android:layout_centerHorizontal="true"
-        android:thicknessRatio="1.9"
-        android:layout_margin="2dp">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/subscribe_img" android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:src="@drawable/logo_splash1" android:clickable="true" android:layout_margin="5dp"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000" />
-
-    <TextView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <TextView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/txtSubscribeTitle"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textSize="8dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_gravity="bottom"
+        android:textAlignment="center"
         android:textColor="#FF000000"
-        android:layout_alignParentTop="true" />
-    </android.support.v7.widget.CardView>
+        android:textSize="8dp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 </LinearLayout>

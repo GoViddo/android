@@ -42,7 +42,7 @@ private ArrayList<OtherRecyclerModel> mOtherrecyclerModels; // this data structu
 
         mViewHolder.textView.setText( mOtherrecyclerModels.get( mPosition ).getTitle() );
 
-        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        mViewHolder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -57,7 +57,7 @@ private ArrayList<OtherRecyclerModel> mOtherrecyclerModels; // this data structu
 
                 }
 
-                Toast.makeText(mViewHolder.context, mOtherrecyclerModels.get(mViewHolder.getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -86,7 +86,7 @@ private ArrayList<OtherRecyclerModel> mOtherrecyclerModels; // this data structu
     class MyViewHolder extends RecyclerView.ViewHolder {
         // view this our others_card layout, so intialize your variables here
 
-        CardView cardView;
+
         TextView textView;
 
         Context context;
@@ -97,7 +97,7 @@ private ArrayList<OtherRecyclerModel> mOtherrecyclerModels; // this data structu
 
             textView=view.findViewById( R.id.txtTitle );
             context = view.getContext();
-            cardView = view.findViewById(R.id.othersCard);
+
 
         }
 

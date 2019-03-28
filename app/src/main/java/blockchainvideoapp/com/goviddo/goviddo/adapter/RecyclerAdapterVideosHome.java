@@ -41,7 +41,7 @@ public class RecyclerAdapterVideosHome extends RecyclerView.Adapter<RecyclerAdap
         final RecyclerAdapterVideosHome.MyViewHolder mViewHolder = new RecyclerAdapterVideosHome.MyViewHolder(view);
 
 
-        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        mViewHolder.ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(  mContext, OnlinePlayerActivity.class );
@@ -84,7 +84,6 @@ public class RecyclerAdapterVideosHome extends RecyclerView.Adapter<RecyclerAdap
 
 
             ImageView = view.findViewById(R.id.video_image);
-            cardView = view.findViewById(R.id.video_image_card_view);
 
 
 

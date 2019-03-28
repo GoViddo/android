@@ -37,7 +37,7 @@ final RecyclerAdapterSubscriptionCard.MyViewHolder mViewHolder = new RecyclerAda
         mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View view) {
-        Toast.makeText(mViewHolder.context, mSubscriptionrecyclerModels.get(mViewHolder.getPosition()).getmTitle(), Toast.LENGTH_SHORT).show();
+
         }
         });
 

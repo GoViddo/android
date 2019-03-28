@@ -366,30 +366,16 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         try {
                             if (response.getString("message").equals("Registration successful")) {
-//                                Intent loginIntent = new Intent(RegistrationActivity.this, MainActivity.class);
-//                                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                startActivity(loginIntent);
-//                                finish();
-
-                               // System.out.println(response.toString());
-
-
 
                                 JSONArray jsActiveKeys = response.getJSONArray( "activeKeys" );
                                 JSONObject jsActiveKeysObject =  jsActiveKeys.getJSONObject( 0 );
 
-                               // System.out.println(jsActiveKeysObject.toString());
-
-
                                 String activePrivateKey = jsActiveKeysObject.getString( "activePrivateKey" );
                                 String activePublicKey = jsActiveKeysObject.getString( "activePublicKey" );
-
-
 
                                 JSONArray jsOwnerKeys = response.getJSONArray( "ownerKeys" );
                                 JSONObject jsOwnerKeysObject =  jsOwnerKeys.getJSONObject( 0 );
 
-                                //System.out.println(jsOwnerKeysObject.toString());
 
                                 String ownerPrivateKey = jsOwnerKeysObject.getString( "ownerPrivateKey" );
                                 String ownerPublicKey = jsOwnerKeysObject.getString( "ownerPublicKey" );

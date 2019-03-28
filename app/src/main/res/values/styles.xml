@@ -3,15 +3,19 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+        <item name="colorPrimary">@color/colorPrimary1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark1</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="VdoMediaButton">
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:layout_width">@dimen/vdo_media_button_width</item>
-        <item name="android:layout_height">@dimen/vdo_media_button_height</item>
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_condensed_regular</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">
@@ -20,7 +24,7 @@
 
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/normalTextColor</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
@@ -38,12 +42,12 @@
     </style>
 
 
-    <style name="AppThemeMyOwnColor" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#000000</item>
-        <item name="android:textColor">#FF0000</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -51,5 +55,20 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="VdoMediaButton">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_width">@dimen/vdo_media_button_width</item>
+        <item name="android:layout_height">@dimen/vdo_media_button_height</item>
+    </style>
 
+
+    <style name="BottomNavigation">
+        <item name="android:background">@color/backgroundColorNormalTabLayout</item>
+        <item name="itemBackground">@drawable/navigation_bar_item_bg</item>
+        <item name="itemIconTint">@color/colorPrimary</item>
+        <item name="itemTextColor">@android:color/white</item>
+        <item name="paddingStart">@dimen/fab_margin</item>
+        <item name="paddingEnd">@dimen/fab_margin</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>
