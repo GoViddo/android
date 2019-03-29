@@ -51,7 +51,7 @@ public void onBindViewHolder(final RecyclerAdapterSubscriptionCard.MyViewHolder 
 
         mPosition = position;
 
-        holder.title.setText( mSubscriptionrecyclerModels.get( mPosition ).getmTitle() );
+        holder.title.setText( mSubscriptionrecyclerModels.get( mPosition ).getmShortenText() );
 
 
         }

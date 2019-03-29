@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     // we need this variable to lock and unlock loading more
     // e.g we should not load more when volley is already loading,
     // loading will be activated when volley completes loading
+
     private boolean itShouldLoadMore = true;
 
     private SliderLayout mDemoSlider;
@@ -86,7 +87,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     BaseSliderView.OnSliderClickListener referenceData = this;
     ViewPagerEx.OnPageChangeListener refernceOnPagechange = this;
-    HashMap<String,String> url_maps,url_refresh;
+    HashMap<String,String> url_maps;
 
 
 
@@ -346,7 +347,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         try {
 
 
-            params.put( "previewMaxCount", 5 );
+            params.put( "previewMaxCount", 10 );
             params.put( "previewLastId", 0 );
 
 
