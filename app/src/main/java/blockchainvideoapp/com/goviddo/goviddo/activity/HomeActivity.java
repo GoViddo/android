@@ -53,6 +53,7 @@ public class HomeActivity extends AppCompatActivity  {
                     transaction.commit();
                     return true;
                 case R.id.navigation_subscription:
+
                     SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
                     transaction.replace( R.id.fragment_container,subscriptionFragment );
                     transaction.commit();

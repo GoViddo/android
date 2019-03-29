@@ -31,6 +31,7 @@ import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscriptio
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscriptionCard;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.EndlessRecyclerViewScrollListner;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.HomeRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionCardLoadData;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionRecyclerModel;
 
 public class SubscriptionFragment extends Fragment {
@@ -58,6 +59,8 @@ public class SubscriptionFragment extends Fragment {
     LinearLayoutManager mLinearLayoutManager;
     public String lastId;
 
+    public int Channel_Id;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,11 +75,15 @@ public class SubscriptionFragment extends Fragment {
         View view = inflater.inflate( R.layout.subscription_fragment, container, false );
 
         mRecyclerModelsPreview = new ArrayList<SubscriptionRecyclerModel>();
+        mRecyclerModels = new ArrayList<SubscriptionRecyclerModel>();
 
         String url = "http://178.128.173.51:3000/getSubscriptionList";
         final RequestQueue requestQueue = Volley.newRequestQueue( getActivity() );
 
         mRecyclerAdapterPreview = new RecyclerAdapterSubscription( mRecyclerModelsPreview );
+        mRecyclerAdapter  = new RecyclerAdapterSubscriptionCard( mRecyclerModels );
+
+        mRecyclerView = view.findViewById( R.id.recycle_subscribe_cardvideo );
 
         mRecyclerViewPreview = view.findViewById( R.id.recycle_subscribe_roundimg );
 
@@ -84,6 +91,12 @@ public class SubscriptionFragment extends Fragment {
 
         mRecyclerViewPreview.setLayoutManager( mLayoutManager );
         mRecyclerViewPreview.setHasFixedSize( true );
+
+
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager( getActivity(), LinearLayoutManager.VERTICAL, false );
+
+        mRecyclerView.setLayoutManager( mLayoutManager1 );
+        mRecyclerView.setHasFixedSize( true );
 
         //we can now set adapter to recyclerView;
 
@@ -126,8 +139,15 @@ public class SubscriptionFragment extends Fragment {
                     String msg = response.getString( "message" );
                     JSONArray data = response.getJSONArray( "data" );
                     for (int i = 0; i < data.length(); i++) {
+
+
                         JSONObject jsonObject = data.getJSONObject( i );
 
+                        SubscriptionCardLoadData subscriptionCardLoadData = new SubscriptionCardLoadData();
+
+                        if (i== 0 && subscriptionCardLoadData.getSubscription_id() == 0){
+                            Channel_Id = jsonObject.getInt( "video_id" );
+                        }
                         int videoId = jsonObject.getInt( "video_id" );
 
 
@@ -144,6 +164,97 @@ public class SubscriptionFragment extends Fragment {
 
                     mRecyclerViewPreview.setAdapter( mRecyclerAdapterPreview );
                     mRecyclerAdapterPreview.notifyDataSetChanged();
+
+
+
+
+
+                    JSONObject params1 = new JSONObject();
+                    try {
+
+
+                        params1.put( "channelId",Channel_Id );
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+                    }
+
+                    String url1 = "http://178.128.173.51:3000/getSubscriptionData";
+                    System.out.println(url1);
+                    JsonObjectRequest jsonArrayRequest = new JsonObjectRequest( Request.Method.POST, url1, params1, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            //              progressDialog.dismiss();
+                            // remember here we are in the main thread, that means,
+                            //volley has finished processing request, and we have our response.
+                            // What else are you waiting for? update itShouldLoadMore = true;
+                            itShouldLoadMore = true;
+                            System.out.println( response.toString() );
+
+                            try {
+
+
+                                String msg = response.getString( "message" );
+                                JSONArray data = response.getJSONArray( "data" );
+                                for (int i = 0; i < data.length(); i++) {
+
+
+                                    JSONObject jsonObject = data.getJSONObject( i );
+
+                                    SubscriptionCardLoadData subscriptionCardLoadData = new SubscriptionCardLoadData();
+
+                                    if (i== 0 && subscriptionCardLoadData.getSubscription_id() == 0){
+                                        Channel_Id = jsonObject.getInt( "video_id" );
+                                    }
+                                    int videoId = jsonObject.getInt( "video_id" );
+
+
+                                    lastId = String.valueOf( videoId );
+
+
+                                    String sliderImage = jsonObject.getString( "home_image" );
+                                    String shortenText = jsonObject.getString( "shorten_text" );
+                                    String vdoCipherId = jsonObject.getString( "vdo_cipher_id" );
+
+                                    mRecyclerModels.add( new SubscriptionRecyclerModel( videoId, sliderImage, shortenText, vdoCipherId ) );
+
+                                }
+
+                                mRecyclerView.setAdapter( mRecyclerAdapter );
+                                mRecyclerAdapter.notifyDataSetChanged();
+
+
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            // please note how we have updated our last id variable which is initially 0 (String)
+                            // outside the loop, java will return the last value, so here it will
+                            // certainly give us lastId that we need
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // also here, volley is not processing, unlock it should load more
+                            itShouldLoadMore = true;
+//                progressDialog.dismiss();
+                            Toast.makeText( getActivity(), "network error!", Toast.LENGTH_SHORT ).show();
+
+                        }
+                    } );
+
+                    Volley.newRequestQueue( getActivity() ).add( jsonArrayRequest );
+
+
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

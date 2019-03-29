@@ -1,7 +1,7 @@
 package blockchainvideoapp.com.goviddo.goviddo.coreclass;
 
 public class SubscriptionCardLoadData {
-    public static int Subscription_id;
+    public static int Subscription_id = 0;
 
 
     public int getSubscription_id() {
