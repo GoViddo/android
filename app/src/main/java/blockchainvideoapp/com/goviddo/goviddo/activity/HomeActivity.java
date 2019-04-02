@@ -79,6 +79,8 @@ public class HomeActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_first);
 
         toolbar = findViewById( R.id.toolbar );
+        setSupportActionBar(toolbar);
+
         frameLayout = findViewById( R.id.fragment_container );
         bottomNavigationView = findViewById( R.id.navigation );
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -93,6 +95,14 @@ public class HomeActivity extends AppCompatActivity  {
 
     }
 
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
 
 }
 

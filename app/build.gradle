@@ -42,5 +42,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     implementation 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.vdocipher.aegis:vdocipher-android:1.0.0-beta4'
+    implementation 'com.vdocipher.aegis:vdocipher-android:1.0.0-beta5'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 }

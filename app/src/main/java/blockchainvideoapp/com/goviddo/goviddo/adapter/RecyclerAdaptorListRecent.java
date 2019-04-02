@@ -2,8 +2,9 @@ package blockchainvideoapp.com.goviddo.goviddo.adapter;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import blockchainvideoapp.com.goviddo.goviddo.Fragments.HomeFragment;
+import blockchainvideoapp.com.goviddo.goviddo.Fragments.OthersFragment;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.RecentRecyclerModel;
 
@@ -44,6 +48,14 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
             public void onClick(View view) {
 
                              //Click listener
+                if (mViewHolder.textView.getText().toString().equalsIgnoreCase("Account"))
+                {
+                            FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
+                            OthersFragment othersFragment = new OthersFragment();
+                            transaction.replace( R.id.fragment_container,othersFragment );
+                            transaction.commit();
+
+                    }
 
             }
         });
