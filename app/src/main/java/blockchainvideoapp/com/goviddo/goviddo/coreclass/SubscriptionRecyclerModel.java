@@ -3,32 +3,49 @@ package blockchainvideoapp.com.goviddo.goviddo.coreclass;
 import android.widget.ImageView;
 
 public class SubscriptionRecyclerModel {
-    private String mDescription;
-    private String mImageView;
-    private String mTitle;
+    private int mVideoId;
+    private String mSliderImage;
+    private String mShortenText;
+    private String mVdoCipherId;
 
-    public SubscriptionRecyclerModel(String imageView, String mTitle) {
-        this.mImageView = imageView;
-        this.mTitle = mTitle;
+    public SubscriptionRecyclerModel(int mVideoId, String mSliderImage, String mShortenText, String mVdoCipherId) {
+        this.mVideoId = mVideoId;
+        this.mSliderImage = mSliderImage;
+        this.mShortenText = mShortenText;
+        this.mVdoCipherId = mVdoCipherId;
     }
 
-
-    public String getImageView() {
-        return mImageView;
+    public String getmVdoCipherId() {
+        return mVdoCipherId;
     }
 
-    public String getmTitle() {
-        return mTitle;
+    public void setmVideoId(int mVideoId) {
+        this.mVideoId = mVideoId;
     }
 
-    public SubscriptionRecyclerModel(String imageView, String mTitle, String descriptiom) {
-        this.mImageView = imageView;
-        this.mTitle = mTitle;
-        this.mDescription=descriptiom;
-    }
-    public String getmDescription() {
-        return mDescription;
+    public void setmSliderImage(String mSliderImage) {
+        this.mSliderImage = mSliderImage;
     }
 
+    public void setmShortenText(String mShortenText) {
+        this.mShortenText = mShortenText;
+    }
+
+    public void setmVdoCipherId(String mVdoCipherId) {
+        this.mVdoCipherId = mVdoCipherId;
+    }
+
+    public int getmVideoId() {
+        return mVideoId;
+    }
+
+    public String getmSliderImage() {
+        return mSliderImage;
+    }
+
+    public String getmShortenText() {
+        return mShortenText;
+    }
 }
+
 

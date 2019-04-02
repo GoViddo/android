@@ -41,6 +41,9 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     private volatile String mOtp;
     private volatile String mPlaybackInfo;
 
+    public long mVideoPlayedTime = 0;
+    public long mLastLoadedTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,9 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         Log.v(TAG, "onStop called");
         disablePlayerUI();
         super.onStop();
+
+        Log.v("Total Video Played Time = ",String.valueOf(mVideoPlayedTime));
+
     }
 
     @Override
@@ -90,6 +96,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         if (mOtp != null && mPlaybackInfo != null) {
             outState.putString("otp", mOtp);
             outState.putString("playbackInfo", mPlaybackInfo);
+            Log.v(TAG, mPlaybackInfo);
         }
     }
 
@@ -121,6 +128,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                     Pair<String, String> pair = Utils.getSampleOtpAndPlaybackInfo();
                     mOtp = pair.first;
                     mPlaybackInfo = pair.second;
+                    Log.i("OTP & Playback Info", mPlaybackInfo);
                     Log.i(TAG, "obtained new otp and playbackInfo");
                     runOnUiThread(new Runnable() {
                         @Override
@@ -218,15 +226,29 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         @Override
         public void onSeekTo(long millis) {
             Log.i(TAG, "onSeekTo: " + String.valueOf(millis));
+
         }
 
         @Override
-        public void onProgress(long millis) {}
+        public void onProgress(long millis) {
+
+            long mVideoTimeCheck = millis - mLastLoadedTime;
+
+            if (mVideoTimeCheck > 3000)
+            {
+                mLastLoadedTime = millis;
+            }
+
+            mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
+            mLastLoadedTime = millis;
+        }
 
         @Override
         public void onPlaybackSpeedChanged(float speed) {
             Log.i(TAG, "onPlaybackSpeedChanged " + speed);
             log("onPlaybackSpeedChanged " + speed);
+            Log.v(TAG, "onPlaybackSpeedChanged " + speed);
+
         }
 
         @Override
@@ -259,6 +281,8 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         public void onMediaEnded(VdoPlayer.VdoInitParams vdoInitParams) {
             Log.i(TAG, "onMediaEnded");
             log("onMediaEnded");
+            Log.i( "onMediaEnded",vdoInitParams.playbackInfo);
+            Log.v("Played Time = ", String.valueOf(mVideoPlayedTime));
         }
     };
 

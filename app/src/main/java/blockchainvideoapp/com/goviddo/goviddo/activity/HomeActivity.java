@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import blockchainvideoapp.com.goviddo.goviddo.Fragments.SubscriptionFragment;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 
 public class HomeActivity extends AppCompatActivity  {
-
 
     Toolbar toolbar;
     FrameLayout frameLayout;
@@ -53,6 +53,7 @@ public class HomeActivity extends AppCompatActivity  {
                     transaction.commit();
                     return true;
                 case R.id.navigation_subscription:
+
                     SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
                     transaction.replace( R.id.fragment_container,subscriptionFragment );
                     transaction.commit();
@@ -80,7 +81,6 @@ public class HomeActivity extends AppCompatActivity  {
 
         toolbar = findViewById( R.id.toolbar );
         setSupportActionBar(toolbar);
-
         frameLayout = findViewById( R.id.fragment_container );
         bottomNavigationView = findViewById( R.id.navigation );
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -104,7 +104,37 @@ public class HomeActivity extends AppCompatActivity  {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
+           Toast.makeText(HomeActivity.this, "Search", android.widget.Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        else if (id == R.id.c) {
+         Toast.makeText(HomeActivity.this, "Add Movie", android.widget.Toast.LENGTH_LONG).show();
+                    return true;
+        }
+
+        else if(id == R.id.action_notification1) {
+          Toast.makeText(HomeActivity.this, "Notification", android.widget.Toast.LENGTH_LONG).show();
+            return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+
+
+
+
 
 
 

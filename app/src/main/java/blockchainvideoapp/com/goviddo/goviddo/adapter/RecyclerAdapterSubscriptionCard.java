@@ -1,6 +1,7 @@
 package blockchainvideoapp.com.goviddo.goviddo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.OnlinePlayerActivity;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.Utils;
 
 public class RecyclerAdapterSubscriptionCard extends RecyclerView.Adapter<RecyclerAdapterSubscriptionCard.MyViewHolder> {
 
@@ -37,6 +42,9 @@ final RecyclerAdapterSubscriptionCard.MyViewHolder mViewHolder = new RecyclerAda
         mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View view) {
+    Intent intent = new Intent(  mViewHolder.context, OnlinePlayerActivity.class );
+    mViewHolder.context.startActivity(intent );
+    Utils.vdociper_id = mSubscriptionrecyclerModels.get(mViewHolder.getPosition()).getmVdoCipherId();
 
         }
         });
@@ -51,7 +59,8 @@ public void onBindViewHolder(final RecyclerAdapterSubscriptionCard.MyViewHolder 
 
         mPosition = position;
 
-        holder.title.setText( mSubscriptionrecyclerModels.get( mPosition ).getmTitle() );
+        holder.title.setText( mSubscriptionrecyclerModels.get( mPosition ).getmShortenText() );
+    Picasso.with(holder.context).load(mSubscriptionrecyclerModels.get(holder.getPosition()).getmSliderImage()).into(holder.imageView);
 
 
         }

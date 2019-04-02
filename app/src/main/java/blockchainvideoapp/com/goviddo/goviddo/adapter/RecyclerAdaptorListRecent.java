@@ -50,6 +50,8 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
                              //Click listener
                 if (mViewHolder.textView.getText().toString().equalsIgnoreCase("Account"))
                 {
+
+
                             FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
                             OthersFragment othersFragment = new OthersFragment();
                             transaction.replace( R.id.fragment_container,othersFragment );
