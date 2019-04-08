@@ -28,4 +28,13 @@
     <dimen name="channel_video_height">31dp</dimen>
     <dimen name="channel_video_width">31dp</dimen>
     <dimen name="profile_size">16dp</dimen>
+
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="large_text_size">20dp</dimen>
+    <dimen name="xlarge_text_size">25dp</dimen>
+    <dimen name="bc_margin_size">30dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="two_dp">2dp</dimen>
+
+
 </resources>

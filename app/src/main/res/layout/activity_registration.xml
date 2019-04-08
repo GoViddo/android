@@ -1,345 +1,325 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".activity.RegistrationActivity"
+    android:background="@color/colorPrimary1"
     android:orientation="vertical"
-    android:background="@mipmap/login_screen">
+    tools:context=".activity.RegistrationActivity">
 
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:scrollbars="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:padding="@dimen/twenty_dp">
 
 
             <ImageView
+                android:id="@+id/imageViewLoginLogo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageViewLoginLogo"
-                android:src="@drawable/logo_splash1"
-                android:layout_marginBottom="20dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="20dp"
                 android:scaleType="center"
-                />
-
+                android:src="@drawable/logo_splash1" />
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autoSizeMaxTextSize="30dp"
+                android:autoSizeMinTextSize="16dp"
+                android:padding="5dp"
                 android:text="First Name"
-                android:autoSizeMinTextSize="16dp"
-                android:autoSizeMaxTextSize="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:textColor="@color/normalTextColor"/>
+                android:textColor="@color/changeTextColor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:autoSizeMinTextSize="16dp"
-                    android:autoSizeMaxTextSize="30dp"
                     android:id="@+id/textInputLayoutUserFirstName"
-                    android:textColorHint="@color/normalTextColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:autoSizeMaxTextSize="30dp"
+                    android:autoSizeMinTextSize="16dp"
+                    android:textColorHint="@color/changeTextColor"
                     app:errorTextAppearance="@color/errorTextColor"
-                    app:hintTextAppearance="@color/normalTextColor">
+                    app:hintTextAppearance="@color/changeTextColor">
 
                     <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/edtUserFirstName"
-                        android:inputType="textEmailAddress"
-                        android:textColorHint="@color/normalTextColor"
-                        android:textColor="@color/normalTextColor"
-                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoSizeMaxTextSize="30dp"
                         android:autoSizeMinTextSize="16dp"
-                        android:autoSizeMaxTextSize="30dp"/>
+                        android:inputType="textEmailAddress"
+                        android:padding="5dp"
+                        android:textColor="@color/changeTextColor"
+                        android:textColorHint="@color/changeTextColor" />
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autoSizeMaxTextSize="30dp"
+                android:autoSizeMinTextSize="16dp"
+                android:padding="5dp"
                 android:text="Last Name"
-                android:autoSizeMinTextSize="16dp"
-                android:autoSizeMaxTextSize="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:textColor="@color/normalTextColor"/>
+                android:textColor="@color/changeTextColor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:autoSizeMinTextSize="16dp"
-                    android:autoSizeMaxTextSize="30dp"
                     android:id="@+id/textInputLayoutUserLastName"
-                    android:textColorHint="@color/normalTextColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:autoSizeMaxTextSize="30dp"
+                    android:autoSizeMinTextSize="16dp"
+                    android:textColorHint="@color/changeTextColor"
                     app:errorTextAppearance="@color/errorTextColor"
-                    app:hintTextAppearance="@color/normalTextColor">
+                    app:hintTextAppearance="@color/changeTextColor">
 
                     <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/edtUserLastName"
-                        android:inputType="textEmailAddress"
-                        android:textColorHint="@color/normalTextColor"
-                        android:textColor="@color/normalTextColor"
-                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoSizeMaxTextSize="30dp"
                         android:autoSizeMinTextSize="16dp"
-                        android:autoSizeMaxTextSize="30dp"/>
+                        android:inputType="textEmailAddress"
+                        android:padding="5dp"
+                        android:textColor="@color/changeTextColor"
+                        android:textColorHint="@color/changeTextColor" />
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
 
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autoSizeMaxTextSize="30dp"
+                android:autoSizeMinTextSize="16dp"
+                android:padding="5dp"
                 android:text="Wallet Name"
-                android:autoSizeMinTextSize="16dp"
-                android:autoSizeMaxTextSize="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:textColor="@color/normalTextColor"/>
+                android:textColor="@color/changeTextColor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:autoSizeMinTextSize="16dp"
-                    android:autoSizeMaxTextSize="30dp"
                     android:id="@+id/textInputLayoutUserWalletName"
-                    android:textColorHint="@color/normalTextColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:autoSizeMaxTextSize="30dp"
+                    android:autoSizeMinTextSize="16dp"
+                    android:textColorHint="@color/changeTextColor"
                     app:errorTextAppearance="@color/errorTextColor"
-                    app:hintTextAppearance="@color/normalTextColor">
+                    app:hintTextAppearance="@color/changeTextColor">
 
                     <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/edtUserWalletName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoSizeMaxTextSize="30dp"
+                        android:autoSizeMinTextSize="16dp"
                         android:inputType="textEmailAddress"
-                        android:textColorHint="@color/normalTextColor"
-                        android:textColor="@color/normalTextColor"
                         android:padding="5dp"
-                        android:autoSizeMinTextSize="16dp"
-                        android:autoSizeMaxTextSize="30dp"/>
+                        android:textColor="@color/changeTextColor"
+                        android:textColorHint="@color/changeTextColor" />
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
 
-
             <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:autoSizeMinTextSize="16dp"
-            android:autoSizeMaxTextSize="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:padding="5dp"
-            android:textColor="@color/normalTextColor"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:autoSizeMinTextSize="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:autoSizeMaxTextSize="30dp"
-                android:id="@+id/textInputLayoutUserNameRegistration"
-                android:textColorHint="@color/normalTextColor"
-                app:errorTextAppearance="@color/errorTextColor"
-                app:hintTextAppearance="@color/normalTextColor">
+                android:autoSizeMinTextSize="16dp"
+                android:padding="5dp"
+                android:text="Email"
+                android:textColor="@color/changeTextColor" />
 
-                <android.support.design.widget.TextInputEditText
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputLayoutUserNameRegistration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edtUserNameRegistration"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/normalTextColor"
-                    android:textColor="@color/normalTextColor"
-                    android:padding="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:autoSizeMaxTextSize="30dp"
                     android:autoSizeMinTextSize="16dp"
-                    android:autoSizeMaxTextSize="30dp"/>
+                    android:textColorHint="@color/changeTextColor"
+                    app:errorTextAppearance="@color/errorTextColor"
+                    app:hintTextAppearance="@color/changeTextColor">
 
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtUserNameRegistration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoSizeMaxTextSize="30dp"
+                        android:autoSizeMinTextSize="16dp"
+                        android:inputType="textEmailAddress"
+                        android:padding="5dp"
+                        android:textColor="@color/changeTextColor"
+                        android:textColorHint="@color/changeTextColor" />
 
-
-
-
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:autoSizeMaxTextSize="30dp"
+                android:autoSizeMinTextSize="16dp"
+                android:padding="5dp"
                 android:text="Password"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:autoSizeMinTextSize="16dp"
-                android:autoSizeMaxTextSize="30dp"
-                android:textColor="@color/normalTextColor"/>
+                android:textColor="@color/changeTextColor" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputLayoutUserPasswordRegistration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:autoSizeMinTextSize="16dp"
+                    android:layout_marginRight="10dp"
                     android:autoSizeMaxTextSize="30dp"
-                    android:id="@+id/textInputLayoutUserPasswordRegistration"
-                    android:textColorHint="@color/normalTextColor"
+                    android:autoSizeMinTextSize="16dp"
+                    android:textColorHint="@color/changeTextColor"
                     app:errorTextAppearance="@color/errorTextColor"
-                    app:hintTextAppearance="@color/normalTextColor">
+                    app:hintTextAppearance="@color/changeTextColor">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtUserPasswordRegistration"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edtUserPasswordRegistration"
-                        android:inputType="textPassword"
-                        android:textColorHint="@color/normalTextColor"
-                        android:textColor="@color/normalTextColor"
-                        android:padding="5dp"
+                        android:autoSizeMaxTextSize="30dp"
                         android:autoSizeMinTextSize="16dp"
-                        android:autoSizeMaxTextSize="30dp"/>
+                        android:inputType="textPassword"
+                        android:padding="5dp"
+                        android:textColor="@color/changeTextColor"
+                        android:textColorHint="@color/changeTextColor" />
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
-
-
-
-
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Re-Enter Password"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:autoSizeMinTextSize="16dp"
+                android:layout_marginRight="10dp"
                 android:autoSizeMaxTextSize="30dp"
-                android:textColor="@color/normalTextColor"/>
+                android:autoSizeMinTextSize="16dp"
+                android:padding="5dp"
+                android:text="Re-Enter Password"
+                android:textColor="@color/changeTextColor" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputLayoutUserReenterPasswordRegistration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:autoSizeMinTextSize="16dp"
+                    android:layout_marginRight="10dp"
                     android:autoSizeMaxTextSize="30dp"
-                    android:id="@+id/textInputLayoutUserReenterPasswordRegistration"
-                    android:textColorHint="@color/normalTextColor"
+                    android:autoSizeMinTextSize="16dp"
+                    android:textColorHint="@color/changeTextColor"
                     app:errorTextAppearance="@color/errorTextColor"
-                    app:hintTextAppearance="@color/normalTextColor">
+                    app:hintTextAppearance="@color/changeTextColor">
 
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtUserReenterPasswordRegistration"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edtUserReenterPasswordRegistration"
-                        android:inputType="textPassword"
-                        android:textColorHint="@color/normalTextColor"
-                        android:textColor="@color/normalTextColor"
-                        android:padding="5dp"
+                        android:autoSizeMaxTextSize="30dp"
                         android:autoSizeMinTextSize="16dp"
-                        android:autoSizeMaxTextSize="30dp"/>
+                        android:inputType="textPassword"
+                        android:padding="5dp"
+                        android:textColor="@color/changeTextColor"
+                        android:textColorHint="@color/changeTextColor" />
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
 
 
             <Button
+                android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Sign up"
-                android:autoSizeMinTextSize="16dp"
-                android:autoSizeMaxTextSize="30dp"
                 android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="50dp"
-                android:textColor="@color/normalTextColor"
+                android:layout_marginBottom="10dp"
+                android:autoSizeMaxTextSize="30dp"
+                android:autoSizeMinTextSize="16dp"
                 android:background="@color/normalButtonColor"
-                android:id="@+id/btnSignUp"/>
+                android:text="Sign up"
+                android:textColor="@color/normalTextColor" />
 
 
         </LinearLayout>

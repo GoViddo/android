@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff0000</color>
-    <color name="colorPrimaryDark">#ff0000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorPrimary1">#F6F6F6</color>
     <color name="colorPrimaryDark1">#F6F6F6</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorNavIcon">#dae9f6</color>
     <color name="colorNavText">#01294b</color>
-
+    <color name="backgroundColor">#EBE7E7</color>
     <color name="backgroundColorNormal">#141414</color>
     <color name="backgroundColorChange">#FFFFFF</color>
-    <color name="normalTextColor">#FFFFFF</color>
+    <color name="normalTextColor">#000000</color>
     <color name="changeTextColor">#000000</color>
     <color name="colorMainTheme">#EB4141</color>
     <color name="errorTextColor">#FF0000</color>
@@ -20,6 +20,9 @@
     <color name="backgroundColorNormalTabLayout">#EB4141</color>
 
     <color name="colorIMF">#FF0000</color>
-    <color name="border">#ffffff</color>
+    <color name="border_color">#E2C8C8</color>
+
+    <color name="border">#E2C8C8</color>
 
 </resources>
+

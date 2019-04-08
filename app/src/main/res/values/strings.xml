@@ -29,5 +29,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_balance_avl">Balance Acailable</string>
+    <string name="title_acc_details">Account Details</string>
+    <string name="title_total_investment">Total Investment</string>
+    <string name="title_total_earning">Total Earning</string>
+    <string name="title_lst_acc_bal">Last Account Balance</string>
+    <string name="title_posted_transactions">Posted Transaction</string>
+    <string name="title_movie_name">Movie Name</string>
+    <string name="title_category">Category</string>
+    <string name="title_long_des">Movie Long description</string>
+    <string name="title_select_movie">Select Movie</string>
+    <string name="btn_upload">Upload</string>
 
 </resources>

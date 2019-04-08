@@ -5,8 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
-        <item name="colorPrimary">@color/colorPrimary1</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark1</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -45,30 +45,37 @@
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
-        <item name="colorPrimary">@android:color/white</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary1</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark1</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textSize">6sp</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="BottomNavigation">
+        <item name="android:background">@color/backgroundColorNormalTabLayout</item>
+        <item name="itemBackground">@drawable/navigation_bar_item_bg</item>
+        <item name="itemIconTint">@color/colorPrimary1</item>
+        <item name="itemTextColor">@android:color/white</item>
+        <item name="paddingStart">@dimen/fab_margin</item>
+        <item name="paddingEnd">@dimen/fab_margin</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
+
     <style name="VdoMediaButton">
         <item name="android:background">?android:attr/selectableItemBackground</item>
         <item name="android:layout_width">@dimen/vdo_media_button_width</item>
         <item name="android:layout_height">@dimen/vdo_media_button_height</item>
     </style>
 
-
-    <style name="BottomNavigation">
-        <item name="android:background">@color/backgroundColorNormalTabLayout</item>
-        <item name="itemBackground">@drawable/navigation_bar_item_bg</item>
-        <item name="itemIconTint">@android:color/white</item>
-        <item name="itemTextColor">@android:color/white</item>
-        <item name="paddingStart">@dimen/fab_margin</item>
-        <item name="paddingEnd">@dimen/fab_margin</item>
-        <item name="android:textSize">10sp</item>
-    </style>
 </resources>
+
+
