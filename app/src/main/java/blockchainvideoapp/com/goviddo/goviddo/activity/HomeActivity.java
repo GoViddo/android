@@ -81,6 +81,7 @@ public class HomeActivity extends AppCompatActivity  {
 
         toolbar = findViewById( R.id.toolbar );
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         frameLayout = findViewById( R.id.fragment_container );
         bottomNavigationView = findViewById( R.id.navigation );
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

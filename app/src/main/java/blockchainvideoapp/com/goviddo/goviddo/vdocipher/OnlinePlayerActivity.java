@@ -46,7 +46,6 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     private VdoPlayer player;
     private VdoPlayerFragment playerFragment;
     private VdoPlayerControlView playerControlView;
-    private TextView eventLog;
     private String eventLogString = "";
 
     private boolean playWhenReady = true;
@@ -77,9 +76,6 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
         playerFragment = (VdoPlayerFragment)getFragmentManager().findFragmentById(R.id.online_vdo_player_fragment);
         playerControlView = (VdoPlayerControlView)findViewById(R.id.player_control_view);
-        eventLog = (TextView)findViewById(R.id.event_log);
-        eventLog.setMovementMethod(ScrollingMovementMethod.getInstance());
-        showControls(false);
 
         currentOrientation = getResources().getConfiguration().orientation;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
@@ -104,7 +100,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
         Log.v("Video ID = ", Utils.vdociper_id );
         Log.v("User Emaild Id = ", mLoginUserDetails.getEmail());
-        Log.v("Total Video Played Time = ",String.valueOf(mVideoPlayedTime));
+        Log.v("Total Video Time = ",String.valueOf(mVideoPlayedTime));
 
 
         JSONObject params = new JSONObject();
@@ -226,7 +222,6 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
     private void log(String msg) {
         eventLogString += (msg + "\n");
-        eventLog.setText(eventLogString);
     }
 
     private void showControls(boolean show) {
@@ -384,8 +379,6 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
             Log.i(TAG, "orientation unchanged");
         } else if (newOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             // hide other views
-            (findViewById(R.id.title_text)).setVisibility(View.GONE);
-            (findViewById(R.id.log_container)).setVisibility(View.GONE);
             (findViewById(R.id.online_vdo_player_fragment)).setLayoutParams(new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
             playerControlView.setFitsSystemWindows(true);
@@ -394,8 +387,6 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
             showControls(false);
         } else {
             // show other views
-            (findViewById(R.id.title_text)).setVisibility(View.VISIBLE);
-            (findViewById(R.id.log_container)).setVisibility(View.VISIBLE);
             (findViewById(R.id.online_vdo_player_fragment)).setLayoutParams(new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
             playerControlView.setFitsSystemWindows(false);

@@ -41,4 +41,25 @@
     <string name="title_select_movie">Select Movie</string>
     <string name="btn_upload">Upload</string>
 
+
+
+
+
+    <string name="title_action"><u>Action</u></string>
+    <string name="title_adventure"><u>Adventure</u></string>
+    <string name="title_comedy"><u>Comedy</u></string>
+    <string name="title_documentary"><u>Documentary</u></string>
+    <string name="title_drama"><u>Drama</u></string>
+    <string name="title_horror"><u>Horror</u></string>
+    <string name="title_international"><u>International</u></string>
+    <string name="title_romantic"><u>Romantic</u></string>
+    <string name="title_thrillers"><u>Thrillers</u></string>
+    <string name="title_share_link">Share Link</string>
+    <string name="action_share">Share</string>
+    <string name="title_description">Description</string>
+    <string name="title_subscribe">Subscribe</string>
+    <string name="title_invest">Invest</string>
+    <string name="title_suggestions">Suggestions</string>
+
+
 </resources>
