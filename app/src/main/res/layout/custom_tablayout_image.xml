@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:scaleType="fitCenter"
-        android:id="@+id/icon"
-        android:layout_gravity="center_horizontal" />
+  <ImageView
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      android:scaleType="fitCenter"
+      android:id="@+id/icon"
+      android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextTabLayout"/>
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/TextTabLayout"/>
 
 
 </LinearLayout>

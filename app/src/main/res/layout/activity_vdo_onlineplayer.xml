@@ -71,6 +71,7 @@
                     android:drawableTop="@drawable/ic_like"
                     android:drawablePadding="@dimen/five_dp"
                     android:gravity="center"
+                    android:clickable="true"
                     android:padding="@dimen/ten_dp"
                     android:text="545"
                     android:textColor="@color/changeTextColor" />
@@ -80,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:drawableTop="@drawable/ic_dislike"
                     android:drawablePadding="@dimen/five_dp"
                     android:gravity="center"
@@ -92,6 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:drawableTop="@drawable/ic_share_option"
                     android:drawablePadding="@dimen/five_dp"
                     android:gravity="center"
@@ -104,6 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:drawableTop="@drawable/ic_add"
                     android:drawablePadding="@dimen/five_dp"
                     android:gravity="center"
@@ -177,6 +181,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/ten_dp"
+                        android:id="@+id/textViewChannelName"
                         android:gravity="left|center"
                         android:text="PS Films"
                         android:textColor="@color/changeTextColor"
@@ -196,10 +201,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/button_height"
                         android:layout_margin="@dimen/five_dp"
-                        android:layout_weight="1"
+                        android:id="@+id/btnSubscribe"
                         android:background="@color/changeTextColor"
                         android:padding="@dimen/five_dp"
-                        android:text="@string/title_subscribe"
+                        android:text="Subscribe"
                         android:textSize="@dimen/xsmall_text_size" />
 
                     <Button
@@ -219,6 +224,7 @@
                         android:layout_margin="@dimen/five_dp"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:text="$30.00"
                         android:textColor="@color/backgroundColorNormalTabLayout"
                         android:textSize="@dimen/small_text_size" />
@@ -235,7 +241,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/ten_dp"
-                android:text="@string/title_suggestions"
+                android:text="Comments"
                 android:textColor="@color/changeTextColor"
                 android:textSize="@dimen/xsmall_text_size"
                 android:textStyle="bold" />
@@ -268,6 +274,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Add comment"
+                    android:id="@+id/commentbox"
                     android:textColor="@color/changeTextColor" />
 
                 <Button
@@ -277,6 +284,7 @@
                     android:layout_margin="@dimen/five_dp"
                     android:background="@color/changeTextColor"
                     android:padding="@dimen/five_dp"
+                    android:id="@+id/addbtn"
                     android:text="ADD"
                     android:textSize="@dimen/xsmall_text_size" />
             </LinearLayout>

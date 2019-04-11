@@ -9,13 +9,13 @@
     app:cardBackgroundColor="@color/backgroundColorNormal"
     app:cardPreventCornerOverlap="false">
 
-    <ImageView
-        android:id="@+id/image_view_image"
-        android:layout_width="@dimen/video_width"
-        android:layout_height="@dimen/video_height"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo_splash1" />
+  <ImageView
+      android:id="@+id/image_view_image"
+      android:layout_width="@dimen/video_width"
+      android:layout_height="@dimen/video_height"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:src="@drawable/logo_splash1" />
 </android.support.v7.widget.CardView>
 
 

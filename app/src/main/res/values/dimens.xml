@@ -29,7 +29,7 @@
     <dimen name="main_video_height">157dp</dimen>
     <dimen name="channel_video_height">31dp</dimen>
     <dimen name="channel_video_width">31dp</dimen>
-    <dimen name="profile_size">16dp</dimen>
+    <dimen name="profile_size">75dp</dimen>
 
     <dimen name="twenty_dp">20dp</dimen>
     <dimen name="large_text_size">20dp</dimen>

@@ -2,6 +2,7 @@ package blockchainvideoapp.com.goviddo.goviddo.Fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.service.autofill.UserData;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscriptio
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscriptionCard;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.EndlessRecyclerViewScrollListner;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.HomeRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionCardLoadData;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionRecyclerModel;
 
@@ -60,6 +62,7 @@ public class SubscriptionFragment extends Fragment {
     public String lastId;
 
     public int Channel_Id;
+    int videoId;
 
 
     @Override
@@ -101,19 +104,14 @@ public class SubscriptionFragment extends Fragment {
         //we can now set adapter to recyclerView;
 
 
-        mRecyclerViewPreview.addOnScrollListener(new EndlessRecyclerViewScrollListner( mLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                loadMore();
-            }
-        });
+
+        LoginUserDetails loginUserDetails = new LoginUserDetails(getActivity());
 
         JSONObject params = new JSONObject();
         try {
 
 
-            params.put( "previewMaxCount", LOAD_LIMIT );
-            params.put( "previewLastId", 0 );
+            params.put( "emailId", loginUserDetails.getEmail() );
             System.out.println( params.toString() );
 
 
@@ -151,22 +149,58 @@ public class SubscriptionFragment extends Fragment {
 
 
 
-                        int videoId = jsonObject.getInt( "video_id" );
+                        videoId = jsonObject.getInt( "video_id" );
 
 
                         lastId = String.valueOf( videoId );
 
 
-                        String sliderImage = jsonObject.getString( "slider_image" );
-                        String shortenText = jsonObject.getString( "shorten_text" );
-                        String vdoCipherId = "";
 
-                        mRecyclerModelsPreview.add( new SubscriptionRecyclerModel( videoId, sliderImage, shortenText, vdoCipherId ) );
+                        JSONObject jsonObject1 = new JSONObject();
+                        jsonObject1.put("channelId", videoId);
+
+                        String channleListUrl = "http://178.128.173.51:3000/getChannelList";
+
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, channleListUrl, jsonObject1, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+
+
+                                try {
+
+                                    System.out.println(response.toString());
+
+                                    int channelId = response.getInt("channelId");
+                                    String sliderImage = response.getString("slider_image");
+                                    String shortenText = response.getString("shorten_text");
+                                    String vdoCipherId = "";
+
+                                    mRecyclerModelsPreview.add( new SubscriptionRecyclerModel( channelId, sliderImage, shortenText, vdoCipherId ) );
+
+                                    mRecyclerViewPreview.setAdapter( mRecyclerAdapterPreview );
+                                    mRecyclerAdapterPreview.notifyDataSetChanged();
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        });
+
+                        Volley.newRequestQueue( getActivity() ).add( jsonObjectRequest );
+
+
 
                     }
 
-                    mRecyclerViewPreview.setAdapter( mRecyclerAdapterPreview );
-                    mRecyclerAdapterPreview.notifyDataSetChanged();
 
 
 
@@ -286,97 +320,6 @@ public class SubscriptionFragment extends Fragment {
 
     }
 
-
-    private void loadMore() {
-
-        String url = "http://178.128.173.51:3000/getSubscriptionList";
-
-
-        JSONObject params = new JSONObject();
-        try {
-
-
-            params.put( "previewMaxCount", LOAD_LIMIT );
-            params.put( "previewLastId", lastId );
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-        }
-        // our php page starts loading from 250 to 1, because we have [ORDER BY id DESC]
-        // So until you clearly understand everything, for this tutorial use ORDER BY ID DESC
-        // so we will do something like this to the php page
-        //==============================================
-        // $limit = $_GET['limit']
-        // $lastId = $_GET['lastId']
-        // then [SELECT * FROM table_name WHERE id < $lastId ORDER_BY id DESC LIMIT $limit ]
-        // here we shall load 15 items from table where lastId id less than last loaded id
-
-        // if you are using [ASC] in sql, your query might change to tis
-        // then [SELECT * FROM table_name WHERE id > $lastId ORDER_BY id DESC LIMIT $limit ]
-        // for this tutorial let's stick to [DESC]
-
-
-        itShouldLoadMore = false; // lock this until volley completes processing
-
-        // progressWheel is just a loading spinner, please see the content_main.xml
-
-        // mProgressWheelPreview.setVisibility(View.VISIBLE);
-
-
-        final JsonObjectRequest jsonArrayRequest = new JsonObjectRequest( Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                // remember here we are in the main thread, that means,
-                //volley has finished processing request, and we have our response.
-                // What else are you waiting for? update itShouldLoadMore = true;
-                itShouldLoadMore = true;
-
-                try {
-
-
-                    String msg = response.getString( "message" );
-                    JSONArray data = response.getJSONArray( "data" );
-                    for (int i = 0; i < data.length(); i++) {
-                        JSONObject jsonObject = data.getJSONObject( i );
-
-                        int videoId = jsonObject.getInt( "video_id" );
-
-
-                        lastId = String.valueOf( videoId );
-
-
-                        String sliderImage = jsonObject.getString( "slider_image" );
-                        String shortenText = jsonObject.getString( "shorten_text" );
-                        String vdoCipherId = "";
-
-                        mRecyclerModelsPreview.add( new SubscriptionRecyclerModel( videoId, sliderImage, shortenText, vdoCipherId ) );
-
-                    }
-
-                    mRecyclerViewPreview.setAdapter( mRecyclerAdapterPreview );
-                    mRecyclerAdapterPreview.notifyDataSetChanged();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //   mProgressWheelPreview.setVisibility(View.GONE);
-                // volley finished and returned network error, update and unlock  itShouldLoadMore
-                itShouldLoadMore = true;
-
-            }
-        } );
-
-        Volley.newRequestQueue( getActivity() ).add( jsonArrayRequest );
-
-    }
 
 
 }

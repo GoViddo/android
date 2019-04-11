@@ -20,7 +20,7 @@ import blockchainvideoapp.com.goviddo.goviddo.coreclass.OtherRecyclerModel;
 
 
 public class RecylerAdapterOthers extends RecyclerView.Adapter<RecylerAdapterOthers.MyViewHolder> {
-private ArrayList<OtherRecyclerModel> mOtherrecyclerModels; // this data structure carries our title and description
+    private ArrayList<OtherRecyclerModel> mOtherrecyclerModels; // this data structure carries our title and description
 
 
     int mPosition;
@@ -103,7 +103,7 @@ private ArrayList<OtherRecyclerModel> mOtherrecyclerModels; // this data structu
 
 
     }
-    }
+}
 
 
 

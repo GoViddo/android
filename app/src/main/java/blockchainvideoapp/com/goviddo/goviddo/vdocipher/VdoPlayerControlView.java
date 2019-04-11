@@ -15,6 +15,7 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vdocipher.aegis.media.ErrorDescription;
 import com.vdocipher.aegis.media.Track;
@@ -23,6 +24,7 @@ import com.vdocipher.aegis.player.VdoPlayer;
 import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
 
 /**
  * A view for controlling playback via a VdoPlayer.
@@ -103,7 +105,8 @@ public class VdoPlayerControlView extends FrameLayout {
         this(context, attrs, 0);
     }
 
-    public VdoPlayerControlView(Context context, AttributeSet attrs, int defStyle) {
+
+    public VdoPlayerControlView(final Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         ffwdMs = DEFAULT_FAST_FORWARD_MS;
@@ -149,7 +152,13 @@ public class VdoPlayerControlView extends FrameLayout {
         controlPanel = findViewById(R.id.vdo_control_panel);
         controllerBackground = findViewById(R.id.vdo_controller_bg);
         setOnClickListener(uiListener);
+
+
+
+
+
     }
+
 
     public void setPlayer(VdoPlayer vdoPlayer) {
         if (player == vdoPlayer) return;
@@ -491,6 +500,8 @@ public class VdoPlayerControlView extends FrameLayout {
             if (hideAfterTimeout) {
                 hideAfterTimeout();
             }
+
+
         }
 
         @Override
@@ -576,4 +587,5 @@ public class VdoPlayerControlView extends FrameLayout {
             return track.type == Track.TYPE_CAPTIONS ? track.language : track.toString();
         }
     }
+
 }

@@ -11,6 +11,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,22 +24,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 import com.vdocipher.aegis.media.ErrorDescription;
 import com.vdocipher.aegis.media.Track;
 import com.vdocipher.aegis.player.VdoPlayer;
 import com.vdocipher.aegis.player.VdoPlayerFragment;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.activity.HomeActivity;
 import blockchainvideoapp.com.goviddo.goviddo.activity.MainActivity;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.CommentsRecyclerModel;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer.InitializationListener {
 
@@ -47,6 +54,12 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     private VdoPlayerFragment playerFragment;
     private VdoPlayerControlView playerControlView;
     private String eventLogString = "";
+    TextView mLikeBtn,mDislikeBtn,mAddList,mShare,mChannelName,mViewCount;
+    TextView mSubscribe,mInvest, mTextVideoTitle, mTextDescriotion;
+    Button mAdd;
+    EditText mCommentBox;
+
+    CircleImageView mChannelLogo;
 
     private boolean playWhenReady = true;
     private int currentOrientation;
@@ -57,6 +70,12 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     public long mVideoPlayedTime = 0;
     public long mLastLoadedTime = 0;
 
+    int comment_id;
+    int user_id;
+    String comment;
+
+
+    LoginUserDetails mLoginUserDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +83,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         setContentView( R.layout.activity_vdo_onlineplayer);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(uiVisibilityListener);
+
+
+         mLoginUserDetails = new LoginUserDetails(OnlinePlayerActivity.this);
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -81,7 +104,412 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
         initializePlayer();
-    }
+
+        mLikeBtn = findViewById( R.id.txt_like );
+        mDislikeBtn = findViewById( R.id.txt_dis_like );
+        mAddList = findViewById( R.id.txt_add_to_list );
+        mShare = findViewById( R.id.txt_share );
+        mSubscribe = findViewById( R.id.btnSubscribe );
+        mInvest = findViewById( R.id.btn_invest );
+        mTextVideoTitle = findViewById( R.id.txt_video_title );
+        mTextDescriotion = findViewById( R.id.txt_short_des );
+        mChannelName = findViewById( R.id.textViewChannelName );
+        mChannelLogo = findViewById( R.id.profile_image );
+        mViewCount = findViewById( R.id.txt_view_count );
+        mAdd = findViewById( R.id.addbtn );
+        mCommentBox = findViewById( R.id.commentbox );
+
+        String url1 = "http://178.128.173.51:3000/getVideoRelatedDetails";
+        RequestQueue queue = Volley.newRequestQueue(OnlinePlayerActivity.this);
+        JSONObject params1 = new JSONObject();
+        try {
+
+
+            params1.put( "userEmail",mLoginUserDetails.getEmail() );
+            params1.put( "videoId",Utils.vdociper_id );
+
+
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, url1, params1, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    String video_Name = response.getString( "videoName" );
+                    String channel_Name = response.getString( "channelName" );
+                    String videoDescription = response.getString( "videoDescription" );
+                    String channelLogo = response.getString( "channelLogo" );
+                    int likeStatus = response.getInt( "likestatus" );
+                    int subscriptionstatus = response.getInt( "subscriptionstatus" );
+                    int videoViewCount = response.getInt( "viewCount" );
+                    int like_count = response.getInt( "likeCount" );
+                    int dislike_count = response.getInt( "dilikeCount" );
+
+                    mTextVideoTitle.setText( video_Name );
+                    mTextDescriotion.setText( videoDescription );
+                    if(subscriptionstatus == 1 ){
+                         mSubscribe.setText( "UnSubscribe" );
+                    }
+                    Picasso.with( OnlinePlayerActivity.this ).load( channelLogo ).into( mChannelLogo );
+                    mChannelName.setText( channel_Name );
+                    mViewCount.setText( videoViewCount + " views" );
+                    mLikeBtn.setText( like_count+"" );
+                    mDislikeBtn.setText( dislike_count+"" );
+
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i(TAG,"Error :" + error.toString());
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put( "Content-Type", "application/json" );
+                return headers;
+            }
+        };
+
+        queue.add( jsonObjectRequest );
+
+
+
+
+
+
+
+
+        mLikeBtn.setOnClickListener( new View.OnClickListener() {
+        @Override
+
+        public void onClick(View v) {
+            String url = "http://178.128.173.51:3000/likeUnlikeSstore";
+            RequestQueue queue = Volley.newRequestQueue(OnlinePlayerActivity.this);
+            JSONObject params = new JSONObject();
+            try {
+
+
+                params.put( "emailid",mLoginUserDetails.getEmail() );
+
+                params.put( "likestatus", 1);
+                params.put( "videoid",Utils.vdociper_id );
+
+
+            }catch (JSONException e) {
+                  e.printStackTrace();
+            }
+
+
+            final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        String message = response.getString( "message" );
+                    }catch (JSONException e){
+                             e.printStackTrace();
+                    }
+                }
+            },new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Log.i(TAG,"Error :" + error.toString());
+                }
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put( "Content-Type", "application/json" );
+                    return headers;
+                }
+            };
+
+            queue.add( jsonObjectRequest );
+        }
+    });
+    mDislikeBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://178.128.173.51:3000/likeUnlikeSstore";
+                RequestQueue queue = Volley.newRequestQueue(OnlinePlayerActivity.this);
+                JSONObject params = new JSONObject();
+                try {
+
+
+                    params.put( "emailid",mLoginUserDetails.getEmail() );
+                    params.put( "likestatus", 0);
+                    params.put( "videoid",Utils.vdociper_id );
+
+
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String message = response.getString( "message" );
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.i(TAG,"Error :" + error.toString());
+                    }
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put( "Content-Type", "application/json" );
+                        return headers;
+                    }
+                };
+
+                queue.add( jsonObjectRequest );
+
+            }
+        } );
+
+    mAddList.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText( OnlinePlayerActivity.this, mLoginUserDetails.getEmail(), Toast.LENGTH_SHORT ).show();
+            }
+        } );
+
+
+    mShare.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText( OnlinePlayerActivity.this,"Share", Toast.LENGTH_SHORT ).show();
+            }
+        } );
+    mSubscribe.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              String url = "http://178.128.173.51:3000/subscriptChannel";
+
+                RequestQueue queue = Volley.newRequestQueue(OnlinePlayerActivity.this);
+                JSONObject params = new JSONObject();
+                try {
+
+
+                    params.put( "emailid",mLoginUserDetails.getEmail() );
+
+                    if (mSubscribe.getText().toString().equalsIgnoreCase( "UnSubscribe" ))
+                    {
+                        params.put( "subscriptionstatus", 0 );
+                    }
+                    else {
+                        params.put( "subscriptionstatus", 1 );
+                    }
+                    params.put( "videoid",Utils.vdociper_id );
+
+
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String message = response.getString( "message" );
+
+                            if(message.equalsIgnoreCase( "success" ))
+                            {
+                                if(mSubscribe.getText().toString().equalsIgnoreCase( "Subscribe" )) {
+                                    mSubscribe.setText( "UnSubscribe" );
+                                }
+                                else{
+                                    mSubscribe.setText( "Subscribe" );
+                                }
+                            }
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.i(TAG,"Error :" + error.toString());
+                    }
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put( "Content-Type", "application/json" );
+                        return headers;
+                    }
+                };
+
+                queue.add( jsonObjectRequest );
+
+
+            }
+        } );
+    mInvest.setVisibility( View.GONE );
+
+
+
+    mAdd.setOnClickListener( new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            String url = "http://178.128.173.51:3000/addComment";
+            if (mCommentBox.toString() != "" && mCommentBox.length() >= 5) {
+
+
+                RequestQueue queue = Volley.newRequestQueue( OnlinePlayerActivity.this );
+                JSONObject params2 = new JSONObject();
+                try {
+
+
+                    params2.put( "emailId", mLoginUserDetails.getEmail() );
+                    params2.put( "videoCipherId", Utils.vdociper_id );
+                    params2.put( "comment", mCommentBox.toString() );
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, url, params2, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String message = response.getString( "messgae" );
+                            System.out.println(message);
+
+                            if (message.equalsIgnoreCase( "success" )){
+                                mCommentBox.setText( "" );
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.i( TAG, "Error :" + error.toString() );
+                    }
+                } ) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put( "Content-Type", "application/json" );
+                        return headers;
+                    }
+                };
+
+                queue.add( jsonObjectRequest );
+            }
+
+            else{
+                Toast.makeText( OnlinePlayerActivity.this, "Comment Box Empty OR Comment is too Short", Toast.LENGTH_SHORT ).show();
+            }
+        }
+    });
+
+
+
+    String getcomment_url = "http://178.128.173.51:3000/getCommentList";
+
+        RequestQueue queue1 = Volley.newRequestQueue( OnlinePlayerActivity.this );
+        JSONObject params2 = new JSONObject();
+        try {
+
+            params2.put( "videoCipherId", Utils.vdociper_id );
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        final ArrayList<CommentsRecyclerModel>recycler_comment = null;
+        final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.GET, getcomment_url, params2, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                     String message = response.getString( "message" );
+                     if(message.equalsIgnoreCase( "success" )) {
+                         JSONArray obj = response.getJSONArray( "data" );
+
+                         for (int i = 0; i < obj.length(); i++) {
+
+                             JSONObject jsonObject = obj.getJSONObject( i );
+
+                             comment_id = jsonObject.getInt( "comment_id" );
+                             user_id = jsonObject.getInt( "userId" );
+                             comment = jsonObject.getString( "comment" );
+
+                             String profileimg_url = "http://178.128.173.51:3000/getUserProfilePics";
+                             RequestQueue queueprofile = Volley.newRequestQueue( OnlinePlayerActivity.this );
+                             JSONObject params = new JSONObject();
+                             try {
+
+                                 params.put( "userId", user_id);
+
+                             } catch (JSONException e) {
+                                 e.printStackTrace();
+                             }
+                             final JsonObjectRequest jsonObjectRequestprofile = new JsonObjectRequest( Request.Method.GET, profileimg_url, params, new Response.Listener<JSONObject>() {
+                                 @Override
+                                 public void onResponse(JSONObject response) {
+                                     try {
+
+                                         String profilepic = response.getString( "profilPic" );
+                                         String username = response.getString( "userName" );
+
+                                         recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
+                                     } catch (JSONException e) {
+                                         e.printStackTrace();
+                                     }
+
+                                 }
+                             }, new Response.ErrorListener() {
+                                 @Override
+                                 public void onErrorResponse(VolleyError error) {
+
+                                 }
+                             } );
+                    }
+                     }
+                }
+
+                 catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i( TAG, "Error :" + error.toString() );
+            }
+        } );
+
+        queue1.add( jsonObjectRequest1 );
+
+
+}
 
     @Override
     protected void onStart() {
@@ -95,8 +523,6 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         disablePlayerUI();
         super.onStop();
 
-
-       LoginUserDetails mLoginUserDetails = new LoginUserDetails(this);
 
         Log.v("Video ID = ", Utils.vdociper_id );
         Log.v("User Emaild Id = ", mLoginUserDetails.getEmail());

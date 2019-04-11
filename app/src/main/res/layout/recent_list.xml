@@ -4,20 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:background="@color/border">
+    android:background="@color/border_color">
 
-    <TextView
-        android:id="@+id/txt_view_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@android:color/white"
-        android:paddingLeft="@dimen/text_margin_left"
-        android:paddingTop="@dimen/ten_dp"
-        android:paddingBottom="@dimen/ten_dp"
-        android:text="text"
-        android:textColor="@color/changeTextColor"
-        android:textSize="@dimen/normal_text_size"
-        android:textStyle="bold" />
+  <TextView
+      android:id="@+id/txt_view_list"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="1dp"
+      android:background="@android:color/white"
+      android:paddingLeft="@dimen/text_margin_left"
+      android:paddingTop="@dimen/ten_dp"
+      android:paddingBottom="@dimen/ten_dp"
+      android:text="text"
+      android:textColor="@color/changeTextColor"
+      android:textSize="@dimen/normal_text_size"
+      android:textStyle="bold" />
 
 </LinearLayout>

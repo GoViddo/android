@@ -17,6 +17,7 @@ public class LoginUserDetails {
     }
 
 
+
     public void removeUserInfo(){
         mSharedPreferences.edit().clear().commit();
     }

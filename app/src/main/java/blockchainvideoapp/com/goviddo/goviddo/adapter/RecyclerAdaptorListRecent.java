@@ -41,23 +41,24 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
 
         final RecyclerAdaptorListRecent.MyViewHolder mViewHolder = new RecyclerAdaptorListRecent.MyViewHolder(view);
 
-       mViewHolder.textView.setText( mRecentRecyclerModels.get( mPosition ).getMtext() );
+        mViewHolder.textView.setText( mRecentRecyclerModels.get( mPosition ).getMtext() );
 
         mViewHolder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                             //Click listener
+                //Click listener
                 if (mViewHolder.textView.getText().toString().equalsIgnoreCase("Account"))
                 {
 
 
-                            FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
-                            OthersFragment othersFragment = new OthersFragment();
-                            transaction.replace( R.id.fragment_container,othersFragment );
-                            transaction.commit();
+                    FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
+                    OthersFragment othersFragment = new OthersFragment();
+                    transaction.replace( R.id.fragment_container,othersFragment );
+                    transaction.addToBackStack("OtherFragments");
+                    transaction.commit();
 
-                    }
+                }
 
             }
         });

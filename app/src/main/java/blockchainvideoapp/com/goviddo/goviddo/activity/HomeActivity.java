@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity  {
     BottomNavigationView bottomNavigationView;
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -49,23 +49,23 @@ public class HomeActivity extends AppCompatActivity  {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     HomeFragment homeFragment = new HomeFragment();
-                    transaction.replace( R.id.fragment_container,homeFragment );
+                    transaction.replace( R.id.fragment_container, homeFragment );
                     transaction.commit();
                     return true;
                 case R.id.navigation_subscription:
 
                     SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-                    transaction.replace( R.id.fragment_container,subscriptionFragment );
+                     transaction.replace( R.id.fragment_container, subscriptionFragment );
                     transaction.commit();
                     return true;
                 case R.id.navigation_recent:
                     HomeFragment homeFragment1 = new HomeFragment();
-                    transaction.replace( R.id.fragment_container,homeFragment1 );
+                    transaction.replace( R.id.fragment_container, homeFragment1 );
                     transaction.commit();
                     return true;
                 case R.id.navigation_more:
                     RecentFragment recentFragment = new RecentFragment();
-                    transaction.replace( R.id.fragment_container,recentFragment );
+                    transaction.replace( R.id.fragment_container, recentFragment );
                     transaction.commit();
                     return true;
             }

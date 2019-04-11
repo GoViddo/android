@@ -55,7 +55,7 @@ public class RecyclerAdapterSubscription extends RecyclerView.Adapter<RecyclerAd
                 FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
 
                 SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-                transaction.replace( R.id.fragment_container,subscriptionFragment );
+                transaction = transaction.replace( R.id.fragment_container, subscriptionFragment );
                 transaction.commit();
 
             }
