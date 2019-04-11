@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.Pair;
@@ -42,6 +43,7 @@ import java.util.Map;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.activity.HomeActivity;
 import blockchainvideoapp.com.goviddo.goviddo.activity.MainActivity;
+import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerForComments;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.CommentsRecyclerModel;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -73,7 +75,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     int comment_id;
     int user_id;
     String comment;
+    ArrayList<CommentsRecyclerModel> recycler_comment;
 
+    RecyclerForComments recyclerForComments;
+    RecyclerView recyclerViewComments;
 
     LoginUserDetails mLoginUserDetails;
     @Override
@@ -118,6 +123,8 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         mViewCount = findViewById( R.id.txt_view_count );
         mAdd = findViewById( R.id.addbtn );
         mCommentBox = findViewById( R.id.commentbox );
+        recyclerViewComments = findViewById( R.id.recycle_suggestion_list );
+
 
         String url1 = "http://178.128.173.51:3000/getVideoRelatedDetails";
         RequestQueue queue = Volley.newRequestQueue(OnlinePlayerActivity.this);
@@ -385,7 +392,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
                     params2.put( "emailId", mLoginUserDetails.getEmail() );
                     params2.put( "videoCipherId", Utils.vdociper_id );
-                    params2.put( "comment", mCommentBox.toString() );
+                    params2.put( "comment", mCommentBox.getText().toString() );
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -443,11 +450,12 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        final ArrayList<CommentsRecyclerModel>recycler_comment = null;
-        final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.GET, getcomment_url, params2, new Response.Listener<JSONObject>() {
+        recycler_comment = new ArrayList<>(  );
+        final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.POST, getcomment_url, params2, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    System.out.println(response.toString());
                      String message = response.getString( "message" );
                      if(message.equalsIgnoreCase( "success" )) {
                          JSONArray obj = response.getJSONArray( "data" );
@@ -470,15 +478,23 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                              } catch (JSONException e) {
                                  e.printStackTrace();
                              }
-                             final JsonObjectRequest jsonObjectRequestprofile = new JsonObjectRequest( Request.Method.GET, profileimg_url, params, new Response.Listener<JSONObject>() {
+                             final JsonObjectRequest jsonObjectRequestprofile = new JsonObjectRequest( Request.Method.POST, profileimg_url, params, new Response.Listener<JSONObject>() {
                                  @Override
                                  public void onResponse(JSONObject response) {
                                      try {
+
+                                         System.out.println(response.toString());
 
                                          String profilepic = response.getString( "profilPic" );
                                          String username = response.getString( "userName" );
 
                                          recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
+
+                                         recyclerForComments = new RecyclerForComments( recycler_comment );
+                                         recyclerForComments.notifyDataSetChanged();
+
+
+
                                      } catch (JSONException e) {
                                          e.printStackTrace();
                                      }
@@ -490,7 +506,13 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
                                  }
                              } );
-                    }
+
+                             queueprofile.add( jsonObjectRequestprofile );
+                         }
+
+
+
+
                      }
                 }
 

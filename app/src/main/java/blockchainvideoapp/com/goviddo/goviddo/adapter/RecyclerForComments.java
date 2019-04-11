@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
@@ -27,7 +29,6 @@ public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComment
 
     public RecyclerForComments(ArrayList<CommentsRecyclerModel> recyclerModels) {
         this.mOtherrecyclerModels = recyclerModels;
-
     }
 
 
@@ -40,21 +41,6 @@ public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComment
 
         final RecyclerForComments.MyViewHolder mViewHolder = new RecyclerForComments.MyViewHolder(view);
 
-        mViewHolder.username.setText( mOtherrecyclerModels.get( mPosition ).getUsername() );
-       // mViewHolder.imageView.setImageURI( mOtherrecyclerModels.get( mPosition ).getProfilepic() );
-        mViewHolder.commentss.setText( mOtherrecyclerModels.get( mPosition ).getComment() );
-        mViewHolder.cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-            }
-        });
-
-
-
-
 
 
         // inflate your custom row layout here
@@ -65,6 +51,13 @@ public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComment
     public void onBindViewHolder(final RecyclerForComments.MyViewHolder holder, int position) {
         mPosition = position;
       //  holder.textView.setText(mOtherrecyclerModels.get( mPosition ).getTitle()  );
+
+        System.out.println(mOtherrecyclerModels.get( mPosition ).getUsername());
+
+        holder.username.setText( mOtherrecyclerModels.get( mPosition ).getUsername() );
+        Picasso.with( holder.context ).load( mOtherrecyclerModels.get( mPosition ).getProfilepic() ).into( holder.imageView );
+        holder.commentss.setText( mOtherrecyclerModels.get( mPosition ).getComment() );
+
 
     }
 
