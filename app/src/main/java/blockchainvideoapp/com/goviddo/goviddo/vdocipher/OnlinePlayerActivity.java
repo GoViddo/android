@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -61,6 +62,9 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     Button mAdd;
     EditText mCommentBox;
 
+    LinearLayoutManager mLayoutManager;
+
+
     CircleImageView mChannelLogo;
 
     private boolean playWhenReady = true;
@@ -81,6 +85,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     RecyclerView recyclerViewComments;
 
     LoginUserDetails mLoginUserDetails;
+
+    String profilepic;
+    String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +133,12 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         mCommentBox = findViewById( R.id.commentbox );
         recyclerViewComments = findViewById( R.id.recycle_suggestion_list );
 
+        mLayoutManager = new LinearLayoutManager( this, LinearLayoutManager.HORIZONTAL, false );
+
+        recyclerViewComments.setLayoutManager( mLayoutManager );
+        recyclerViewComments.setHasFixedSize( true );
+
+
 
         String url1 = "http://178.128.173.51:3000/getVideoRelatedDetails";
         RequestQueue queue = Volley.newRequestQueue(OnlinePlayerActivity.this);
@@ -140,11 +154,14 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
             e.printStackTrace();
         }
 
+        System.out.println("request = "+params1.toString());
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, url1, params1, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+
+                    System.out.println("Response for chk = "+ response.toString());
 
                     String video_Name = response.getString( "videoName" );
                     String channel_Name = response.getString( "channelName" );
@@ -156,7 +173,8 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                     int like_count = response.getInt( "likeCount" );
                     int dislike_count = response.getInt( "dilikeCount" );
 
-                    mTextVideoTitle.setText( video_Name );
+                    mTextVideoTitle.setText(video_Name);
+
                     mTextDescriotion.setText( videoDescription );
                     if(subscriptionstatus == 1 ){
                          mSubscribe.setText( "UnSubscribe" );
@@ -166,6 +184,101 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                     mViewCount.setText( videoViewCount + " views" );
                     mLikeBtn.setText( like_count+"" );
                     mDislikeBtn.setText( dislike_count+"" );
+
+
+
+                    String getcomment_url = "http://178.128.173.51:3000/getCommentList";
+
+                    RequestQueue queue1 = Volley.newRequestQueue( OnlinePlayerActivity.this );
+                    JSONObject params2 = new JSONObject();
+                    try {
+
+                        params2.put( "videoCipherId", Utils.vdociper_id );
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    recycler_comment = new ArrayList<>(  );
+                    recyclerForComments = new RecyclerForComments( recycler_comment );
+                    recyclerViewComments.setAdapter(recyclerForComments);
+                    final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.POST, getcomment_url, params2, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                System.out.println(response.toString());
+                                String message = response.getString( "message" );
+                                if(message.equalsIgnoreCase( "success" )) {
+                                    JSONArray obj = response.getJSONArray( "data" );
+
+                                    for (int i = 0; i < obj.length(); i++) {
+
+                                        JSONObject jsonObject = obj.getJSONObject( i );
+
+                                        comment_id = jsonObject.getInt( "comment_id" );
+                                        user_id = jsonObject.getInt( "userId" );
+                                        comment = jsonObject.getString( "comment" );
+
+                                        String profileimg_url = "http://178.128.173.51:3000/getUserProfilePics";
+                                        RequestQueue queueprofile = Volley.newRequestQueue( OnlinePlayerActivity.this );
+                                        JSONObject params = new JSONObject();
+                                        try {
+
+                                            params.put( "userId", user_id);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        final JsonObjectRequest jsonObjectRequestprofile = new JsonObjectRequest( Request.Method.POST, profileimg_url, params, new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                try {
+
+                                                    System.out.println(response.toString());
+
+                                                    profilepic = response.getString( "profilPic" );
+                                                    username = response.getString( "userName" );
+
+                                                    recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
+                                                    recyclerForComments.notifyDataSetChanged();
+
+
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+
+                                            }
+                                        } );
+
+                                        queueprofile.add( jsonObjectRequestprofile );
+                                    }
+
+
+
+
+                                }
+                            }
+
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            Log.i( TAG, "Error :" + error.toString() );
+                        }
+                    } );
+
+                    queue1.add( jsonObjectRequest1 );
+
+
 
 
                 }catch (JSONException e){
@@ -407,6 +520,101 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
                             if (message.equalsIgnoreCase( "success" )){
                                 mCommentBox.setText( "" );
+
+
+                                String getcomment_url = "http://178.128.173.51:3000/getCommentList";
+
+                                RequestQueue queue1 = Volley.newRequestQueue( OnlinePlayerActivity.this );
+                                JSONObject params2 = new JSONObject();
+                                try {
+
+                                    params2.put( "videoCipherId", Utils.vdociper_id );
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                recycler_comment = new ArrayList<>(  );
+                                recyclerForComments = new RecyclerForComments( recycler_comment );
+                                recyclerViewComments.setAdapter(recyclerForComments);
+                                final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.POST, getcomment_url, params2, new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        try {
+                                            System.out.println(response.toString());
+                                            String message = response.getString( "message" );
+                                            if(message.equalsIgnoreCase( "success" )) {
+                                                JSONArray obj = response.getJSONArray( "data" );
+
+                                                for (int i = 0; i < obj.length(); i++) {
+
+                                                    JSONObject jsonObject = obj.getJSONObject( i );
+
+                                                    comment_id = jsonObject.getInt( "comment_id" );
+                                                    user_id = jsonObject.getInt( "userId" );
+                                                    comment = jsonObject.getString( "comment" );
+
+                                                    String profileimg_url = "http://178.128.173.51:3000/getUserProfilePics";
+                                                    RequestQueue queueprofile = Volley.newRequestQueue( OnlinePlayerActivity.this );
+                                                    JSONObject params = new JSONObject();
+                                                    try {
+
+                                                        params.put( "userId", user_id);
+
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    final JsonObjectRequest jsonObjectRequestprofile = new JsonObjectRequest( Request.Method.POST, profileimg_url, params, new Response.Listener<JSONObject>() {
+                                                        @Override
+                                                        public void onResponse(JSONObject response) {
+                                                            try {
+
+                                                                System.out.println(response.toString());
+
+                                                                profilepic = response.getString( "profilPic" );
+                                                                username = response.getString( "userName" );
+
+                                                                recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
+                                                                recyclerForComments.notifyDataSetChanged();
+
+
+
+                                                            } catch (JSONException e) {
+                                                                e.printStackTrace();
+                                                            }
+
+                                                        }
+                                                    }, new Response.ErrorListener() {
+                                                        @Override
+                                                        public void onErrorResponse(VolleyError error) {
+
+                                                        }
+                                                    } );
+
+                                                    queueprofile.add( jsonObjectRequestprofile );
+                                                }
+
+
+
+
+                                            }
+                                        }
+
+                                        catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                        Log.i( TAG, "Error :" + error.toString() );
+                                    }
+                                } );
+
+                                queue1.add( jsonObjectRequest1 );
+
+
+
                             }
 
                         } catch (JSONException e) {
@@ -439,96 +647,6 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
 
 
-    String getcomment_url = "http://178.128.173.51:3000/getCommentList";
-
-        RequestQueue queue1 = Volley.newRequestQueue( OnlinePlayerActivity.this );
-        JSONObject params2 = new JSONObject();
-        try {
-
-            params2.put( "videoCipherId", Utils.vdociper_id );
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        recycler_comment = new ArrayList<>(  );
-        final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.POST, getcomment_url, params2, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    System.out.println(response.toString());
-                     String message = response.getString( "message" );
-                     if(message.equalsIgnoreCase( "success" )) {
-                         JSONArray obj = response.getJSONArray( "data" );
-
-                         for (int i = 0; i < obj.length(); i++) {
-
-                             JSONObject jsonObject = obj.getJSONObject( i );
-
-                             comment_id = jsonObject.getInt( "comment_id" );
-                             user_id = jsonObject.getInt( "userId" );
-                             comment = jsonObject.getString( "comment" );
-
-                             String profileimg_url = "http://178.128.173.51:3000/getUserProfilePics";
-                             RequestQueue queueprofile = Volley.newRequestQueue( OnlinePlayerActivity.this );
-                             JSONObject params = new JSONObject();
-                             try {
-
-                                 params.put( "userId", user_id);
-
-                             } catch (JSONException e) {
-                                 e.printStackTrace();
-                             }
-                             final JsonObjectRequest jsonObjectRequestprofile = new JsonObjectRequest( Request.Method.POST, profileimg_url, params, new Response.Listener<JSONObject>() {
-                                 @Override
-                                 public void onResponse(JSONObject response) {
-                                     try {
-
-                                         System.out.println(response.toString());
-
-                                         String profilepic = response.getString( "profilPic" );
-                                         String username = response.getString( "userName" );
-
-                                         recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
-
-                                         recyclerForComments = new RecyclerForComments( recycler_comment );
-                                         recyclerForComments.notifyDataSetChanged();
-
-
-
-                                     } catch (JSONException e) {
-                                         e.printStackTrace();
-                                     }
-
-                                 }
-                             }, new Response.ErrorListener() {
-                                 @Override
-                                 public void onErrorResponse(VolleyError error) {
-
-                                 }
-                             } );
-
-                             queueprofile.add( jsonObjectRequestprofile );
-                         }
-
-
-
-
-                     }
-                }
-
-                 catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.i( TAG, "Error :" + error.toString() );
-            }
-        } );
-
-        queue1.add( jsonObjectRequest1 );
 
 
 }

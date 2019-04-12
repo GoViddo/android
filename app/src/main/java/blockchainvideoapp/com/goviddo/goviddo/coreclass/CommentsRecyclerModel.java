@@ -10,6 +10,9 @@ public class CommentsRecyclerModel {
         this.comment_id = comment_id;
         this.userid = userid;
         this.comment = comment;
+        this.profilepic = profilepic;
+        this.Username = Username;
+
     }
 
     public String getUsername() {

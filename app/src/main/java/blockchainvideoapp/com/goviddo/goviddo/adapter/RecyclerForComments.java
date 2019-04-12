@@ -1,10 +1,9 @@
 package blockchainvideoapp.com.goviddo.goviddo.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
-import blockchainvideoapp.com.goviddo.goviddo.activity.MainActivity;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.CommentsRecyclerModel;
-import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
-import blockchainvideoapp.com.goviddo.goviddo.coreclass.OtherRecyclerModel;
 
 public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComments.MyViewHolder> {
     private ArrayList<CommentsRecyclerModel> mOtherrecyclerModels; // this data structure carries our title and description
@@ -37,6 +33,7 @@ public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComment
     public RecyclerForComments.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 
+
         View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.activity_commentlist, parent, false);
 
         final RecyclerForComments.MyViewHolder mViewHolder = new RecyclerForComments.MyViewHolder(view);
@@ -52,9 +49,10 @@ public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComment
         mPosition = position;
       //  holder.textView.setText(mOtherrecyclerModels.get( mPosition ).getTitle()  );
 
-        System.out.println(mOtherrecyclerModels.get( mPosition ).getUsername());
+        System.out.println(mOtherrecyclerModels.get( mPosition ).getProfilepic());
 
         holder.username.setText( mOtherrecyclerModels.get( mPosition ).getUsername() );
+
         Picasso.with( holder.context ).load( mOtherrecyclerModels.get( mPosition ).getProfilepic() ).into( holder.imageView );
         holder.commentss.setText( mOtherrecyclerModels.get( mPosition ).getComment() );
 
@@ -87,6 +85,8 @@ public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComment
             imageView = view.findViewById( R.id.comment_profile_image );
             username = view.findViewById( R.id.txtCommentUserName );
             context = view.getContext();
+
+            commentss.setMovementMethod(new ScrollingMovementMethod());
 
 
         }
