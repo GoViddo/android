@@ -1,6 +1,7 @@
 package blockchainvideoapp.com.goviddo.goviddo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.RecentRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.OnlinePlayerActivity;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.Utils;
 
 public class RecyclerAdaptorRecent extends RecyclerView.Adapter<RecyclerAdaptorRecent.MyViewHolder> {
     private ArrayList<RecentRecyclerModel> mRecentRecyclerModels; // this data structure carries our title and description
@@ -38,16 +43,24 @@ public class RecyclerAdaptorRecent extends RecyclerView.Adapter<RecyclerAdaptorR
         mViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               //Click Listener
+
+                Intent intent = new Intent(  mViewHolder.context, OnlinePlayerActivity.class );
+                mViewHolder.context.startActivity(intent );
+                Utils.vdociper_id = mRecentRecyclerModels.get(mViewHolder.getLayoutPosition()).getmTextFirst();
+
+
+                //Toast.makeText(mViewHolder.context, mRecentRecyclerModels.get(mViewHolder.getLayoutPosition()).getmTextFirst(), Toast.LENGTH_SHORT).show();
             }
         });
-        // inflate your custom row layout here
+
         return mViewHolder;
     }
 
     @Override
     public void onBindViewHolder(final RecyclerAdaptorRecent.MyViewHolder holder, int position) {
         mPosition = position;
+        Picasso.with(holder.context).load(mRecentRecyclerModels.get(holder.getPosition()).getmImage()).into(holder.imageView);
+
 
     }
 

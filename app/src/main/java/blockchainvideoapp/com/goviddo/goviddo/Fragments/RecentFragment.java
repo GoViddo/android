@@ -8,14 +8,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.pnikosis.materialishprogress.ProgressWheel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdaptorListRecent;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdaptorRecent;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.HomeRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserInfo;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.RecentRecyclerModel;
 
 public class RecentFragment extends Fragment {
+
+    private static int LOAD_LIMIT = 15;
+
+    private String lastId = "0";
+
+    private boolean itShouldLoadMore = true;
 
     public RecentFragment() {
         // Required empty public constructor
@@ -32,6 +52,8 @@ public class RecentFragment extends Fragment {
     private ArrayList<RecentRecyclerModel> mRecyclerModelsRecentList;
     LinearLayoutManager mLinearLayoutManagerRecentList;
 
+    ProgressWheel mProgressWheelRecent;
+
 
 
 
@@ -45,16 +67,8 @@ public class RecentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recent_fragment, container, false);
 
-        String url ="https://pngimage.net/genie-aladdin-png-6/";
-        mRecyclerModelsRecentImage = new ArrayList<>();
-        mRecyclerModelsRecentImage.add( new RecentRecyclerModel( url,"PS Films" ) );
-        mRecyclerModelsRecentImage.add( new RecentRecyclerModel( url,"PS Films" ) );
-        mRecyclerModelsRecentImage.add( new RecentRecyclerModel( url,"PS Films" ) );
-        mRecyclerModelsRecentImage.add( new RecentRecyclerModel( url,"PS Films" ) );
-        mRecyclerModelsRecentImage.add( new RecentRecyclerModel( url,"PS Films" ) );
-        mRecyclerModelsRecentImage.add( new RecentRecyclerModel( url,"PS Films" ) );
-        mRecyclerAdapterRecentImage = new RecyclerAdaptorRecent(mRecyclerModelsRecentImage);
 
+        String url = "http://178.128.173.51:3000/getUserHistory";
 
         mRecyclerViewRecentImage =  view.findViewById(R.id.image_recyler_view);
 
@@ -63,8 +77,81 @@ public class RecentFragment extends Fragment {
         mRecyclerViewRecentImage.setLayoutManager( mLinearLayoutManagerRecentImage );
         mRecyclerViewRecentImage.setHasFixedSize(true);
 
+        LoginUserDetails loginUserDetails = new LoginUserDetails(getActivity());
+
+        JSONObject params = new JSONObject();
+        try {
+
+
+            params.put( "userEmial",  loginUserDetails.getEmail());
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+        }
+        mRecyclerModelsRecentImage = new ArrayList<>();
+
+
+
+        final JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+
+
+                    String msg = response.getString("message");
+                    JSONArray data = response.getJSONArray("data");
+                    for (int i=0; i<data.length(); i++)
+                    {
+                        JSONObject jsonObject = data.getJSONObject(i);
+
+                        int videoId = jsonObject.getInt("videoId");
+
+
+                        lastId = String.valueOf(videoId);
+
+
+                        String videoName = jsonObject.getString("videoName");
+                        String homeImage = jsonObject.getString("home_image");
+                        String shortenText = jsonObject.getString("shorten_text");
+                        String vdoCipherId = jsonObject.getString("vdoCipherId");
+                        String vdoCipherDesc = jsonObject.getString("videoDescription");
+
+
+                        mRecyclerModelsRecentImage.add( new RecentRecyclerModel( homeImage,vdoCipherId ) );
+                        mRecyclerAdapterRecentImage = new RecyclerAdaptorRecent(mRecyclerModelsRecentImage);
+                        mRecyclerViewRecentImage.setAdapter( mRecyclerAdapterRecentImage );
+                        mRecyclerAdapterRecentImage.notifyDataSetChanged();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mProgressWheelRecent.setVisibility(View.GONE);
+                // volley finished and returned network error, update and unlock  itShouldLoadMore
+
+
+            }
+        });
+
+        Volley.newRequestQueue(getActivity()).add(jsonArrayRequest);
+
+
+
+
+
+
+
+
+
         //we can now set adapter to recyclerView;
-        mRecyclerViewRecentImage.setAdapter( mRecyclerAdapterRecentImage );
 
         //The Code for CardView in recent
 
