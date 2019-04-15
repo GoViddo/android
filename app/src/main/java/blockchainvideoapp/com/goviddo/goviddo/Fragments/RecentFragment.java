@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdaptorListRecent;
@@ -100,6 +104,7 @@ public class RecentFragment extends Fragment {
 
                 try {
 
+                    System.out.println(response.toString());
 
                     String msg = response.getString("message");
                     JSONArray data = response.getJSONArray("data");
@@ -134,12 +139,18 @@ public class RecentFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mProgressWheelRecent.setVisibility(View.GONE);
                 // volley finished and returned network error, update and unlock  itShouldLoadMore
 
-
+                //Toast.makeText( getContext(), "network error!", Toast.LENGTH_SHORT ).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
 
         Volley.newRequestQueue(getActivity()).add(jsonArrayRequest);
 

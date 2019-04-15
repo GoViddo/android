@@ -68,7 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    public static void verifyStoragePermissions(Activity activity) {
+    public static boolean verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
@@ -81,7 +81,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     REQUEST_EXTERNAL_STORAGE
             );
 
+            return false;
 
+        }
+        else{
+            return true;
         }
 
     }
@@ -170,8 +174,25 @@ public class RegistrationActivity extends AppCompatActivity {
                 mUserWalletName = mEdtUserWalletName.getText().toString();
 
 
-                submitForm(mUserFirstName,mUserLastName,mUserWalletName,mUserName,mPassword, mConfirmPassword);
+                if (verifyStoragePermissions(RegistrationActivity.this)) {
+                    submitForm(mUserFirstName, mUserLastName, mUserWalletName, mUserName, mPassword, mConfirmPassword);
                 }
+                else{
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RegistrationActivity.this);
+                    alertDialogBuilder.setMessage("Please Allow storage permission we need this permission to store your wallet keys without that you will not recived any rewards...");
+                            alertDialogBuilder.setPositiveButton("OK",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            verifyStoragePermissions(RegistrationActivity.this);
+                                        }
+                                    });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+
+            }
         });
         }
 
@@ -180,7 +201,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         userName = userName.trim();
 
-        if(userName.trim().isEmpty() || (userName.length() <= 3)){
+        if(userName.trim().isEmpty() || (userName.length() <= 2)){
             mTextInputLayoutUseFirstName.setErrorEnabled( true );
             mTextInputLayoutUseFirstName.setError( "Please Enter Valid First Name" );
             return false;
@@ -194,7 +215,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         userName = userName.trim();
 
-        if(userName.trim().isEmpty() || (userName.length() <= 3)){
+        if(userName.trim().isEmpty() || (userName.length() <= 2)){
             mTextInputLayoutUserLastName.setErrorEnabled( true );
             mTextInputLayoutUserLastName.setError( "Please Enter Valid Last Name" );
             return false;
@@ -272,7 +293,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private boolean checkConfirmPassword(String confirmPassword, String password) {
         if (confirmPassword.trim().isEmpty() || (confirmPassword.length() < 7) ){
             mTextInputLayoutUserConfirmPassword.setErrorEnabled(true);
-            mTextInputLayoutUserConfirmPassword.setError("Please re-enter password length greater than 6");
+            mTextInputLayoutUserConfirmPassword.setError("The password does not match, please enter again.");
             return false;
         }
         else {
@@ -280,7 +301,7 @@ public class RegistrationActivity extends AppCompatActivity {
             if(!confirmPassword.equals(password))
             {
                 mTextInputLayoutUserConfirmPassword.setErrorEnabled(true);
-                mTextInputLayoutUserConfirmPassword.setError("Password does not matched please enter again");
+                mTextInputLayoutUserConfirmPassword.setError("The password does not match, please enter again.");
                 return false;
             }
             else {
@@ -507,11 +528,18 @@ public class RegistrationActivity extends AppCompatActivity {
                         stream.write(data.getBytes());
                         stream.close();
                         alertDialog.cancel();
+
+                        Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                        startActivity(intent);
+
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+
+
 
                 }
 

@@ -860,13 +860,25 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
             long mVideoTimeCheck = millis - mLastLoadedTime;
 
-            if (mVideoTimeCheck > 3000)
+            if (mVideoTimeCheck > 3000 && millis>mLastLoadedTime)
             {
                 mLastLoadedTime = millis;
+                mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
+                mLastLoadedTime = millis;
+                Toast.makeText(OnlinePlayerActivity.this, "="+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
             }
+            else if(mVideoTimeCheck > 3000 && millis<mLastLoadedTime){
+                mLastLoadedTime = millis;
+                mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
+                mLastLoadedTime = millis;
+                Toast.makeText(OnlinePlayerActivity.this, "&"+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
+            }
+            else {
 
-            mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
-            mLastLoadedTime = millis;
+                mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
+                mLastLoadedTime = millis;
+                Toast.makeText(OnlinePlayerActivity.this, "chk="+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override

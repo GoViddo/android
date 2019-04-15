@@ -232,7 +232,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText( getActivity(), "Please check internet connection", Toast.LENGTH_SHORT ).show();
+                            Toast.makeText( getContext(), "Please check internet connection", Toast.LENGTH_SHORT ).show();
 
                         }
                     }){
@@ -299,7 +299,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText( getActivity(), "Network Error Home Fragment", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( getContext(), "Network Error Home Fragment", Toast.LENGTH_SHORT ).show();
 
             }
         } );
@@ -321,7 +321,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(getActivity(),slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -420,12 +420,12 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 // also here, volley is not processing, unlock it should load more
                 itShouldLoadMore = true;
                 progressDialog.dismiss();
-                Toast.makeText(getActivity(), "network error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "network error!", Toast.LENGTH_SHORT).show();
 
             }
         });
 
-        Volley.newRequestQueue(getActivity()).add(jsonArrayRequest);
+        Volley.newRequestQueue(getContext()).add(jsonArrayRequest);
 
 
     }

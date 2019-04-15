@@ -281,7 +281,7 @@ public class SubscriptionFragment extends Fragment {
                             // also here, volley is not processing, unlock it should load more
                             itShouldLoadMore = true;
 //                progressDialog.dismiss();
-                            Toast.makeText( getActivity(), "network error!", Toast.LENGTH_SHORT ).show();
+                            Toast.makeText( getContext(), "Currently You haven't subscribed any channel", Toast.LENGTH_SHORT ).show();
 
                         }
                     } );
