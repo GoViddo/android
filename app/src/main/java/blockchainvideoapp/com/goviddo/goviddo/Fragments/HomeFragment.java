@@ -1,6 +1,7 @@
 package blockchainvideoapp.com.goviddo.goviddo.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -40,6 +41,8 @@ import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterHome;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.EndlessRecyclerViewScrollListner;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.HomeRecyclerCardViewModel;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.HomeRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.OnlinePlayerActivity;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.Utils;
 
 public class HomeFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
 
@@ -321,7 +324,13 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(getContext(),slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(  getContext(), OnlinePlayerActivity.class );
+        startActivity(intent );
+        Utils.vdociper_id = slider.getBundle().get("extra").toString();
+
+
     }
 
 

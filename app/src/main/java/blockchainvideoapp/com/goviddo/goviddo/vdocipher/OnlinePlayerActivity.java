@@ -408,7 +408,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     mAddList.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText( OnlinePlayerActivity.this, mLoginUserDetails.getEmail(), Toast.LENGTH_SHORT ).show();
+                //Toast.makeText( OnlinePlayerActivity.this, mLoginUserDetails.getEmail(), Toast.LENGTH_SHORT ).show();
             }
         } );
 
@@ -416,7 +416,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     mShare.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText( OnlinePlayerActivity.this,"Share", Toast.LENGTH_SHORT ).show();
+                //Toast.makeText( OnlinePlayerActivity.this,"Share", Toast.LENGTH_SHORT ).show();
+
+
+
             }
         } );
     mSubscribe.setOnClickListener( new View.OnClickListener() {
@@ -783,7 +786,8 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(OnlinePlayerActivity.this, message, Toast.LENGTH_SHORT).show();
+                //
+                //Toast.makeText(OnlinePlayerActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -867,19 +871,19 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                 mLastLoadedTime = millis;
                 mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
                 mLastLoadedTime = millis;
-                Toast.makeText(OnlinePlayerActivity.this, "="+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(OnlinePlayerActivity.this, "="+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
             }
             else if(mVideoTimeCheck > 3000 && millis<mLastLoadedTime){
                 mLastLoadedTime = millis;
                 mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
                 mLastLoadedTime = millis;
-                Toast.makeText(OnlinePlayerActivity.this, "&"+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(OnlinePlayerActivity.this, "&"+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
             }
             else {
 
                 mVideoPlayedTime = mVideoPlayedTime + (millis - mLastLoadedTime);
                 mLastLoadedTime = millis;
-                Toast.makeText(OnlinePlayerActivity.this, "chk="+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(OnlinePlayerActivity.this, "chk="+mVideoPlayedTime, Toast.LENGTH_SHORT).show();
             }
         }
 
