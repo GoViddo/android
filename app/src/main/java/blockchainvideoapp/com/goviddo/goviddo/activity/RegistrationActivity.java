@@ -201,7 +201,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         userName = userName.trim();
 
-        if(userName.trim().isEmpty() || (userName.length() <= 2)){
+        if(userName.trim().isEmpty() || (userName.length() <= 1)){
             mTextInputLayoutUseFirstName.setErrorEnabled( true );
             mTextInputLayoutUseFirstName.setError( "Please Enter Valid First Name" );
             return false;
@@ -215,7 +215,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         userName = userName.trim();
 
-        if(userName.trim().isEmpty() || (userName.length() <= 2)){
+        if(userName.trim().isEmpty() || (userName.length() <= 1)){
             mTextInputLayoutUserLastName.setErrorEnabled( true );
             mTextInputLayoutUserLastName.setError( "Please Enter Valid Last Name" );
             return false;
@@ -316,7 +316,22 @@ public class RegistrationActivity extends AppCompatActivity {
     public void submitForm(String firstname,String lastname,String walletName,String userName, String password, String confirmPassword)
     {
 
-        if (!checkUserName(userName)){
+        if (!checkFirstName(firstname)){
+        mVibrator.vibrate(1000);
+        return;
+
+    }
+    else if (!checkLastName(lastname)){
+        mVibrator.vibrate(1000);
+        return;
+
+    }
+    else if (!checkWalletName(walletName)){
+        mVibrator.vibrate(1000);
+        return;
+
+    }
+     else if (!checkUserName(userName)){
             mVibrator.vibrate(1000);
             return;
         }
@@ -326,21 +341,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         }
         else if (!checkConfirmPassword(confirmPassword, password)){
-            mVibrator.vibrate(1000);
-            return;
-
-        }
-        else if (!checkFirstName(firstname)){
-            mVibrator.vibrate(1000);
-            return;
-
-        }
-        else if (!checkLastName(lastname)){
-            mVibrator.vibrate(1000);
-            return;
-
-        }
-        else if (!checkWalletName(walletName)){
             mVibrator.vibrate(1000);
             return;
 

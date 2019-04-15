@@ -456,9 +456,11 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                             {
                                 if(mSubscribe.getText().toString().equalsIgnoreCase( "Subscribe" )) {
                                     mSubscribe.setText( "UnSubscribe" );
+                                    Toast.makeText(OnlinePlayerActivity.this, "Thank you for subscribing channel", Toast.LENGTH_SHORT).show();
                                 }
                                 else{
                                     mSubscribe.setText( "Subscribe" );
+                                    Toast.makeText(OnlinePlayerActivity.this, "Sorry to hear that you had unsubscribed channel", Toast.LENGTH_SHORT).show();
                                 }
                             }
 

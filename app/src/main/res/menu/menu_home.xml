@@ -5,12 +5,12 @@
     tools:context=".activity.HomeActivity">
 
 
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search"
-        android:iconTint="@color/changeTextColor"
-        android:title="@string/action_search"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/action_search"-->
+        <!--android:icon="@drawable/ic_search"-->
+        <!--android:iconTint="@color/changeTextColor"-->
+        <!--android:title="@string/action_search"-->
+        <!--app:showAsAction="always" />-->
 
     <item
         android:id="@+id/c"
@@ -18,6 +18,7 @@
         android:iconTint="@color/changeTextColor"
         android:title="Add Movie"
         app:showAsAction="always" />
+
     <item
         android:id="@+id/action_notification1"
         android:icon="@drawable/ic_notification"
