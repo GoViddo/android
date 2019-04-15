@@ -250,7 +250,7 @@
                 android:id="@+id/recycle_suggestion_list"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/main_video_height"
-                android:scrollbars="horizontal" />
+                android:scrollbars="vertical" />
 
             <LinearLayout
                 android:layout_width="match_parent"

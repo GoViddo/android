@@ -25,6 +25,7 @@ public class RecyclerForComments extends RecyclerView.Adapter<RecyclerForComment
 
     public RecyclerForComments(ArrayList<CommentsRecyclerModel> recyclerModels) {
         this.mOtherrecyclerModels = recyclerModels;
+        System.out.println(recyclerModels.size());
     }
 
 

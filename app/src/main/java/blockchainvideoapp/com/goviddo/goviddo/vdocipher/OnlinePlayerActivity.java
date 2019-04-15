@@ -200,6 +200,12 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                     }
                     recycler_comment = new ArrayList<>(  );
                     recyclerForComments = new RecyclerForComments( recycler_comment );
+
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager( OnlinePlayerActivity.this, LinearLayoutManager.VERTICAL, false );
+
+                    recyclerViewComments.setLayoutManager(linearLayoutManager);
+
+
                     recyclerViewComments.setAdapter(recyclerForComments);
                     final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.POST, getcomment_url, params2, new Response.Listener<JSONObject>() {
                         @Override
@@ -239,6 +245,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                                                     username = response.getString( "userName" );
 
                                                     recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
+                                                   // recyclerViewComments.setAdapter(recyclerForComments);
                                                     recyclerForComments.notifyDataSetChanged();
 
 
@@ -540,6 +547,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                                 }
                                 recycler_comment = new ArrayList<>(  );
                                 recyclerForComments = new RecyclerForComments( recycler_comment );
+                                LinearLayoutManager linearLayoutManager = new LinearLayoutManager( OnlinePlayerActivity.this, LinearLayoutManager.VERTICAL, false );
+
+                                recyclerViewComments.setLayoutManager(linearLayoutManager);
+
                                 recyclerViewComments.setAdapter(recyclerForComments);
                                 final JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest( Request.Method.POST, getcomment_url, params2, new Response.Listener<JSONObject>() {
                                     @Override
@@ -579,6 +590,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                                                                 username = response.getString( "userName" );
 
                                                                 recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
+                                                                recyclerViewComments.setAdapter(recyclerForComments);
                                                                 recyclerForComments.notifyDataSetChanged();
 
 
