@@ -430,7 +430,48 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     mAddList.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText( OnlinePlayerActivity.this, mLoginUserDetails.getEmail(), Toast.LENGTH_SHORT ).show();
+            String url = "http://178.128.173.51:3000/addToWatchList";
+            JSONObject jsonObject = new JSONObject(  );
+                try {
+                    jsonObject.put( "emailid",mLoginUserDetails.getEmail());
+                    jsonObject.put( "videoCipherId",Utils.vdociper_id );
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                RequestQueue queue = Volley.newRequestQueue(OnlinePlayerActivity.this);
+
+                final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String message = response.getString( "msg" );
+                            if(message.equalsIgnoreCase( "success" ))
+                            {
+                                Toast.makeText( OnlinePlayerActivity.this, "Added to Watch List", Toast.LENGTH_LONG ).show();
+                            }
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.i(TAG,"Error :" + error.toString());
+                    }
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put( "Content-Type", "application/json" );
+                        return headers;
+                    }
+                };
+
+                queue.add( jsonObjectRequest );
+
+
             }
         } );
 
