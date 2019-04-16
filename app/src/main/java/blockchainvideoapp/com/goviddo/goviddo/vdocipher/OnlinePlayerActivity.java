@@ -230,6 +230,9 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                                         try {
 
                                             params.put( "userId", user_id);
+                                            params.put("comment", comment);
+                                            params.put("commentId", comment_id);
+
 
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -243,6 +246,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
                                                     profilepic = response.getString( "profilPic" );
                                                     username = response.getString( "userName" );
+                                                    comment = response.getString("comment");
+                                                    comment_id = response.getInt("commentId");
+                                                    user_id = response.getInt("userId");
+
 
                                                     recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
                                                    // recyclerViewComments.setAdapter(recyclerForComments);
@@ -342,6 +349,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                 public void onResponse(JSONObject response) {
                     try {
                         String message = response.getString( "message" );
+                        int likecnt = response.getInt("likeCount");
+                        int dlikecnt = response.getInt("dislikeCount");
+                        mLikeBtn.setText(likecnt+"");
+                        mDislikeBtn.setText(dlikecnt+"");
                     }catch (JSONException e){
                              e.printStackTrace();
                     }
@@ -388,6 +399,10 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                     public void onResponse(JSONObject response) {
                         try {
                             String message = response.getString( "message" );
+                            int likecnt = response.getInt("likeCount");
+                            int dlikecnt = response.getInt("dislikeCount");
+                            mLikeBtn.setText(likecnt+"");
+                            mDislikeBtn.setText(dlikecnt+"");
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -466,11 +481,11 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                             {
                                 if(mSubscribe.getText().toString().equalsIgnoreCase( "Subscribe" )) {
                                     mSubscribe.setText( "UnSubscribe" );
-                                    Toast.makeText(OnlinePlayerActivity.this, "Thank you for subscribing channel", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(OnlinePlayerActivity.this, "Thank you for subscribing to the channel", Toast.LENGTH_LONG).show();
                                 }
                                 else{
                                     mSubscribe.setText( "Subscribe" );
-                                    Toast.makeText(OnlinePlayerActivity.this, "Sorry to hear that you had unsubscribed channel", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(OnlinePlayerActivity.this, "Sorry to see you go.. we hope that you will come back soon", Toast.LENGTH_LONG).show();
                                 }
                             }
 
@@ -575,6 +590,9 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                                                     try {
 
                                                         params.put( "userId", user_id);
+                                                        params.put("comment", comment);
+                                                        params.put("commentId", comment_id);
+
 
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
@@ -588,6 +606,9 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
                                                                 profilepic = response.getString( "profilPic" );
                                                                 username = response.getString( "userName" );
+                                                                comment = response.getString("comment");
+                                                                comment_id = response.getInt("commentId");
+                                                                user_id = response.getInt("userId");
 
                                                                 recycler_comment.add( new CommentsRecyclerModel( comment_id, user_id, comment, profilepic, username ) );
                                                                 recyclerViewComments.setAdapter(recyclerForComments);

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Vibrator;
@@ -118,6 +119,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
             AlertDialog alert11 = builder1.create();
             alert11.show();
+
+            Button positiveButton = alert11.getButton(AlertDialog.BUTTON_POSITIVE);
+            positiveButton.setTextColor(Color.parseColor("#FF0000"));
+
+
 
         }
 
