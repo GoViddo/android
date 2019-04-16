@@ -15,7 +15,7 @@
     <color name="colorMainTheme">#EB4141</color>
     <color name="errorTextColor">#FF0000</color>
     <color name="normalButtonColor">#FF0000</color>
-
+    <color name="red_500">#FF0000</color>
 
     <color name="backgroundColorNormalTabLayout">#EB4141</color>
 

@@ -78,6 +78,12 @@
         <item name="android:layout_height">@dimen/vdo_media_button_height</item>
     </style>
 
+
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/red_500</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>
 
 

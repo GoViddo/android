@@ -45,8 +45,8 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
         mViewHolder.roundedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(  mViewHolder.context, OnlinePlayerActivity.class );
-                mViewHolder.context.startActivity(intent );
+                Intent intent = new Intent(mViewHolder.context, OnlinePlayerActivity.class);
+                mViewHolder.context.startActivity(intent);
                 Utils.vdociper_id = homeRecyclerModels.get(mViewHolder.getPosition()).getmVdoCipherId();
 
                 //Toast.makeText(mViewHolder.context, homeRecyclerModels.get(mViewHolder.getPosition()).getmVdoCipherId(), Toast.LENGTH_SHORT).show();
@@ -57,7 +57,6 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
         // inflate your custom row layout here
         return mViewHolder;
     }
-
     @Override
     public void onBindViewHolder(final RecyclerAdapterHome.MyViewHolder holder, int position) {
 
