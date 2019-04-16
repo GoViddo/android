@@ -105,7 +105,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setMessage("We need only storage permission to store the your wallet keys. \n\nThis is must because these are one time keys and we are not storing these anywhere. Without these keys you can't use your wallet.");
+            builder1.setMessage("GoViddo is committed to protecting and respecting your privacy, In order to provide you our services and to access your wallet, your wallet keys should be stored in your device. We never store your keys with us. \n" +
+                    "\n" +
+                    "\n We need your consent to us storing your keys in your device, please Allow the Permission.");
             builder1.setCancelable(true);
 
             builder1.setPositiveButton(

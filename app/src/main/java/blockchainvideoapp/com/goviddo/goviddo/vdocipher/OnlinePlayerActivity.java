@@ -479,7 +479,12 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     mShare.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText( OnlinePlayerActivity.this,"Share", Toast.LENGTH_SHORT ).show();
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "https://goviddo.com/shareurl.php?vdoid="+Utils.vdociper_id;
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "GoViddo");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
 
 

@@ -193,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
             mTextInputLayoutUserPassword.setErrorEnabled( false );
 
 
-            mLoginUserDetails.setEmail( userName );
 
 
             JSONObject params = new JSONObject();
