@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary1"
     android:orientation="vertical"
     tools:context=".activity.RegistrationActivity">
@@ -320,6 +321,16 @@
                 android:background="@color/normalButtonColor"
                 android:text="Sign up"
                 android:textColor="@color/normalTextColor" />
+
+            <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/progress_wheel"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                wheel:matProg_barColor="@color/colorIMF"
+                wheel:matProg_progressIndeterminate="true" />
 
 
         </LinearLayout>

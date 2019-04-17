@@ -94,16 +94,18 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println(requestCode);
-      System.out.println(resultCode);
-//        System.out.println(data);
+
 
         if(requestCode == 0){
             if(resultCode == -1||requestCode==0){
                 Toast.makeText(this, "Shared Successfully", Toast.LENGTH_SHORT).show();
+
+                //comment toast and I will provide URL - Call volley - same like like and dislike button
+
             }
-            else
-                Toast.makeText(this, "Share Action Incomplete", Toast.LENGTH_SHORT).show();
+            else {
+                //Toast.makeText( this, "Share Action Incomplete", Toast.LENGTH_SHORT ).show();
+            }
         }
     }
 
