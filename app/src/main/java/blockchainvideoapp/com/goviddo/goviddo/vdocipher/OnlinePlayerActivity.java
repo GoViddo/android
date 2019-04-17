@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -88,6 +89,23 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
     String profilepic;
     String username;
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println(requestCode);
+      System.out.println(resultCode);
+//        System.out.println(data);
+
+        if(requestCode == 0){
+            if(resultCode == -1||requestCode==0){
+                Toast.makeText(this, "Shared Successfully", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(this, "Share Action Incomplete", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -486,10 +504,15 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
+                startActivityForResult(sharingIntent, 0);
 
 
             }
-        } );
+        });
+
+
+
+
     mSubscribe.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1106,4 +1129,9 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
             }
         }
     };
+
+
+
+
+
 }
