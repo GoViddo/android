@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/ten_dp"
-                android:text="Happy Season 01 Episode 01"
                 android:textColor="@color/changeTextColor"
                 android:textSize="@dimen/normal_text_size"
                 android:textStyle="bold" />
@@ -52,7 +51,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/ten_dp"
-                android:text="36520 Views"
                 android:textColor="@color/changeTextColor"
                 android:textSize="@dimen/xsmall_text_size"
                 android:textStyle="bold" />
@@ -73,7 +71,6 @@
                     android:gravity="center"
                     android:clickable="true"
                     android:padding="@dimen/ten_dp"
-                    android:text="545"
                     android:textColor="@color/changeTextColor" />
 
                 <TextView
@@ -86,7 +83,6 @@
                     android:drawablePadding="@dimen/five_dp"
                     android:gravity="center"
                     android:padding="@dimen/ten_dp"
-                    android:text="45"
                     android:textColor="@color/changeTextColor" />
 
                 <TextView
@@ -133,7 +129,6 @@
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:padding="@dimen/ten_dp"
-                android:text="Added on Sep 30, 2018 The Göscheneralp is very close to the large St.Gotthard, a well-known mountain in Switzerland."
                 android:textColor="@color/changeTextColor"
                 android:textSize="@dimen/xsmall_text_size" />
 

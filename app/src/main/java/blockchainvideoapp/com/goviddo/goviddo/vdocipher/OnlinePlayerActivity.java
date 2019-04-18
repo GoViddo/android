@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ActivityChooserView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
@@ -98,16 +99,50 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 
         if(requestCode == 0){
             if(resultCode == -1||requestCode == 0){
-                Toast.makeText(this, "Shared Successfully", Toast.LENGTH_SHORT).show();
+
 
                 //comment toast and I will provide URL - Call volley - same like like and dislike button
 
-            }
+                String url = "http://178.128.173.51:3000/sahreUrlTokens";
+                RequestQueue queueprofile = Volley.newRequestQueue( OnlinePlayerActivity.this );
+                JSONObject params = new JSONObject();
+                try {
+
+                    params.put( "emailid", mLoginUserDetails.getEmail());
+                    params.put("videoId", Utils.vdociper_id);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                final JsonObjectRequest jsonObjectRequestprofile = new JsonObjectRequest( Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            String message = response.getString( "message" );
+                            Toast.makeText( OnlinePlayerActivity.this, "Shared Successfully", Toast.LENGTH_SHORT ).show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                } );
+
+                queueprofile.add( jsonObjectRequestprofile );
+        }
             else {
                 //Toast.makeText( this, "Share Action Incomplete", Toast.LENGTH_SHORT ).show();
             }
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

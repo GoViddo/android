@@ -171,7 +171,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                         @Override
                         public void onResponse(JSONObject response) {
                             url_maps = new HashMap<String, String>();
-                            //System.out.println(response.toString());
 
                             try {
                                 String message = response.getString("message");
