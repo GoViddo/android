@@ -99,7 +99,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
 //        System.out.println(data);
 
         if(requestCode == 0){
-            if(resultCode == -1||requestCode==0){
+            if(resultCode == -1||requestCode == 0){
                 Toast.makeText(this, "Shared Successfully", Toast.LENGTH_SHORT).show();
             }
             else
