@@ -3,6 +3,7 @@ package blockchainvideoapp.com.goviddo.goviddo.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +53,8 @@ import java.util.Map;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
 
+import static android.app.PendingIntent.getActivity;
+import static android.view.View.GONE;
 import static com.android.volley.Request.Method.HEAD;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -63,6 +67,9 @@ public class RegistrationActivity extends AppCompatActivity {
     LoginUserDetails mLoginUserDetails;
 
     TextView mTextViewNewUserRegistration;
+    ProgressWheel mProgressWheelPreview;
+    ProgressDialog progressDialog;
+
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -97,6 +104,9 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+
+        mProgressWheelPreview =  findViewById(R.id.progress_wheel);
 
         int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
@@ -164,6 +174,9 @@ public class RegistrationActivity extends AppCompatActivity {
         mEdtUserLastName = findViewById(R.id.edtUserLastName);
         mEdtUserWalletName = findViewById(R.id.edtUserWalletName);
 
+        progressDialog = new ProgressDialog(RegistrationActivity.this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
 
 
 
@@ -196,8 +209,10 @@ public class RegistrationActivity extends AppCompatActivity {
                                         }
                                     });
 
+
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
+
                 }
 
             }
@@ -362,7 +377,7 @@ public class RegistrationActivity extends AppCompatActivity {
             mTextInputLayoutUserWalletName.setErrorEnabled(false);
 
             walletName = walletName.trim();
-
+            progressDialog.show();
             JSONObject params = new JSONObject();
             try {
 
@@ -418,6 +433,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             else {
                                 System.out.println(response.toString());
                                 Toast.makeText(RegistrationActivity.this,"User with this email already Exist",Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -429,7 +445,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
-                    Toast.makeText(RegistrationActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Please Check Credentials", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
                 }
             })
@@ -539,6 +556,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -557,6 +575,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
         alertDialog.show();
+        progressDialog.dismiss();
+
+
+        mProgressWheelPreview.setVisibility(GONE);
     }
 
 
