@@ -368,10 +368,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         // user will not load more when volley is processing another request
         // only load more when  volley is free
 
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+//        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
 
 
 
@@ -380,7 +380,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void onResponse(JSONObject response) {
 
-                progressDialog.dismiss();
+             //   progressDialog.dismiss();
                 // remember here we are in the main thread, that means,
                 //volley has finished processing request, and we have our response.
                 // What else are you waiting for? update itShouldLoadMore = true;
@@ -427,7 +427,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             public void onErrorResponse(VolleyError error) {
                 // also here, volley is not processing, unlock it should load more
                 itShouldLoadMore = true;
-                progressDialog.dismiss();
+                //  progressDialog.dismiss();
                 Toast.makeText(getContext(), "network error!", Toast.LENGTH_SHORT).show();
 
             }
