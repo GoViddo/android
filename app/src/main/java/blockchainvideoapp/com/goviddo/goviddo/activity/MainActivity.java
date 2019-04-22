@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.javiersantos.appupdater.AppUpdater;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         verifyStoragePermissions(this);
+
+        AppUpdater appUpdater = new AppUpdater(this);
+        appUpdater.start();
+
 
 
         mLoginUserDetails = new LoginUserDetails(this);

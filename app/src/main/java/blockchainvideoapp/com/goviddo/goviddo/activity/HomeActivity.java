@@ -23,6 +23,8 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
+import com.github.javiersantos.appupdater.AppUpdater;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,10 @@ public class HomeActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+
+
+        AppUpdater appUpdater = new AppUpdater(this);
+        appUpdater.start();
 
         toolbar = findViewById( R.id.toolbar );
         setSupportActionBar(toolbar);

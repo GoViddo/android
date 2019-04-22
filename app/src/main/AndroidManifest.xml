@@ -14,11 +14,7 @@
 
     <application
         android:allowBackup="true"
-<<<<<<< HEAD
-        android:icon="@drawable/g1"
-=======
         android:icon="@drawable/ic_launcher"
->>>>>>> 9239b5f3118eac2739ebf5baaacfc3cbf119c7bc
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher_round"
         android:supportsRtl="true"
