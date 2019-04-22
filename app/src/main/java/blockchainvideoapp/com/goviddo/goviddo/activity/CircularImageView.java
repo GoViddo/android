@@ -22,6 +22,8 @@ public class CircularImageView extends android.support.v7.widget.AppCompatImageV
     private Paint paintBorder;
     private BitmapShader shader;
 
+    public static String backGroundColor;
+
     public CircularImageView(Context context) {
         super(context);
         setup();
@@ -44,7 +46,13 @@ public class CircularImageView extends android.support.v7.widget.AppCompatImageV
         paint.setAntiAlias(true);
 
         paintBorder = new Paint();
-        setBorderColor(Color.parseColor( "#ff0000" ));
+        if(backGroundColor == null)
+        {
+            setBorderColor( Color.parseColor( "#d3d3d3" ) );
+        }
+        else {
+            setBorderColor( Color.parseColor( backGroundColor ) );
+        }
         paintBorder.setAntiAlias(true);
     }
 

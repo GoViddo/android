@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".vdocipher.OnlinePlayerActivity">
 
@@ -162,15 +163,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <blockchainvideoapp.com.goviddo.goviddo.activity.CircularImageView
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
                         android:id="@+id/profile_image"
                         android:layout_width="@dimen/channel_video_width"
                         android:layout_height="@dimen/channel_video_height"
-                        android:layout_gravity="center"
                         android:clickable="true"
-                        android:src="@drawable/logo_splash1"
-                        app:civ_border_color="#FF000000"
-                        app:civ_border_width="2dp" />
+                        android:src="@drawable/logo_splash1" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -254,15 +254,15 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/ten_dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <blockchainvideoapp.com.goviddo.goviddo.activity.CircularImageView
+
+                    android:layout_width="@dimen/sub_video_width"
+                    android:layout_height="@dimen/sub_video_height"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/user_image"
-                    android:layout_width="@dimen/channel_video_width"
-                    android:layout_height="@dimen/channel_video_height"
-                    android:layout_gravity="center"
                     android:clickable="true"
-                    android:src="@drawable/logo_splash1"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp" />
+                    android:src="@drawable/logo_splash1" />
 
                 <EditText
                     android:layout_width="wrap_content"

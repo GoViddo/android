@@ -2,12 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/subscribe_img"
+    <blockchainvideoapp.com.goviddo.goviddo.activity.CircularImageView
         android:layout_width="@dimen/sub_video_width"
         android:layout_height="@dimen/sub_video_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_splash1"
+        android:id="@+id/subscribe_img"
         android:layout_margin="5dp"
         android:clickable="true"
         app:civ_border_color="@color/border"

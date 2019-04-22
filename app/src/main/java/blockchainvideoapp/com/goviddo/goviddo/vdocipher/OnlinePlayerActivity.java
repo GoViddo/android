@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
+import blockchainvideoapp.com.goviddo.goviddo.activity.CircularImageView;
 import blockchainvideoapp.com.goviddo.goviddo.activity.HomeActivity;
 import blockchainvideoapp.com.goviddo.goviddo.activity.MainActivity;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerForComments;
@@ -67,7 +68,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     LinearLayoutManager mLayoutManager;
 
 
-    CircleImageView mChannelLogo;
+    blockchainvideoapp.com.goviddo.goviddo.activity.CircularImageView mChannelLogo;
 
     private boolean playWhenReady = true;
     private int currentOrientation;
@@ -96,6 +97,7 @@ public class OnlinePlayerActivity extends AppCompatActivity implements VdoPlayer
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        CircularImageView.backGroundColor = "#FFFFFF";
 
         if(requestCode == 0){
             if(resultCode == -1||requestCode == 0){

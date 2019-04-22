@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
+import blockchainvideoapp.com.goviddo.goviddo.activity.CircularImageView;
 import blockchainvideoapp.com.goviddo.goviddo.activity.MainActivity;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecylerAdapterOthers;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
@@ -52,7 +53,7 @@ public class OthersFragment extends Fragment {
     View view;
 
     TextView mTxtUserName;
-    CircleImageView mProfileImageView;
+    CircularImageView mProfileImageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
