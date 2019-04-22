@@ -9,7 +9,7 @@
       android:id="@+id/card_text"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:padding="@dimen/five_dp"
+      android:paddingLeft="@dimen/five_dp"
       android:textSize="@dimen/xsmall_text_size"
       android:textStyle="bold" />
 

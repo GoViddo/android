@@ -12,6 +12,7 @@
   <ImageView
       android:id="@+id/image_view_image"
       android:layout_width="@dimen/video_width"
+      android:scaleType="fitXY"
       android:layout_height="@dimen/video_height"
       android:layout_alignParentTop="true"
       android:layout_centerHorizontal="true"
