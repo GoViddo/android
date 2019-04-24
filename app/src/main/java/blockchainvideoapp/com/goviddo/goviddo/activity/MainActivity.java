@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     if(BuildConfig.VERSION_CODE <version_code_current){
 
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                        builder1.setTitle( Html.fromHtml("<font color='#FF0000'>Update Available</font>") );
                         builder1.setMessage(update_info);
                         builder1.setPositiveButton(
                                 "Update",
@@ -152,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         requestQueue.add( jsonObjectRequest );
-
 
 
         mLoginUserDetails = new LoginUserDetails(this);

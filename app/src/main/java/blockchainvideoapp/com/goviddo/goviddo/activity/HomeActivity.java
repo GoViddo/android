@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -117,6 +119,7 @@ public class HomeActivity extends AppCompatActivity  {
                     if(BuildConfig.VERSION_CODE <version_code_current){
 
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(HomeActivity.this);
+                        builder1.setTitle( Html.fromHtml("<font color='#FF0000'>Update Available</font>") );
                         builder1.setMessage(update_info);
                         builder1.setPositiveButton(
                                 "Update",
@@ -126,14 +129,12 @@ public class HomeActivity extends AppCompatActivity  {
                                         try {
                                             startActivity(new Intent( Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                                         } catch (android.content.ActivityNotFoundException anfe) {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                                        }
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName))); }
                                     }
                                 });
 
                         AlertDialog alert11 = builder1.create();
                         alert11.show();
-
                         Button positiveButton = alert11.getButton(AlertDialog.BUTTON_POSITIVE);
                         positiveButton.setTextColor( Color.parseColor("#FF0000"));
 
