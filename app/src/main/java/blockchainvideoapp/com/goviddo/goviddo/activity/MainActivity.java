@@ -2,15 +2,19 @@ package blockchainvideoapp.com.goviddo.goviddo.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -27,12 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.github.javiersantos.appupdater.AppUpdater;
-import com.github.javiersantos.appupdater.AppUpdaterUtils;
-import com.github.javiersantos.appupdater.enums.AppUpdaterError;
-import com.github.javiersantos.appupdater.enums.Display;
-import com.github.javiersantos.appupdater.enums.UpdateFrom;
-import com.github.javiersantos.appupdater.objects.Update;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,8 +39,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import blockchainvideoapp.com.goviddo.goviddo.BuildConfig;
 import blockchainvideoapp.com.goviddo.goviddo.R;
+import blockchainvideoapp.com.goviddo.goviddo.adapter.RecylerAdapterOthers;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserInfo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,34 +90,68 @@ public class MainActivity extends AppCompatActivity {
         verifyStoragePermissions(this);
 
 
-        AppUpdater appUpdater = new AppUpdater(this)
-                .setDisplay(Display.DIALOG)
-                .setCancelable(false)
-                .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
-                .setButtonUpdate("Update now?")
-                .setButtonDismiss("Maybe later")
-                .setCancelable(false)
-                .setIcon(R.drawable.ic_launcher);
+        String update_url = "http://178.128.173.51:3000/updateApp";
 
-        appUpdater.start();
+        RequestQueue requestQueue = Volley.newRequestQueue(this );
 
-        AppUpdaterUtils appUpdaterUtils = new AppUpdaterUtils(this).withListener(new AppUpdaterUtils.UpdateListener() {
-                    @Override
-                    public void onSuccess(Update update, Boolean isUpdateAvailable) {
-                        Log.d("Latest Version", update.getLatestVersion());
-                        Log.d("Latest Version Code", String.valueOf(update.getLatestVersionCode()));
-                        Log.d("Release notes", update.getReleaseNotes());
-                        Log.d("URL", String.valueOf(update.getUrlToDownload()));
-                        Log.d("Is update available?", Boolean.toString(isUpdateAvailable));
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, update_url,  new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+                try {
+                    int version_code_current = response.getInt("version_code_current");
+                    int version_code_min = response.getInt("version_code_min");
+                    String update_info = response.getString("update_info");
+                    String update_date = response.getString("update_date");
+
+                    if(BuildConfig.VERSION_CODE <version_code_current){
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                        builder1.setMessage(update_info);
+                        builder1.setPositiveButton(
+                                "Update",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                                        try {
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                        } catch (android.content.ActivityNotFoundException anfe) {
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                        }
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                        Button positiveButton = alert11.getButton(AlertDialog.BUTTON_POSITIVE);
+                        positiveButton.setTextColor( Color.parseColor("#FF0000"));
+
+
                     }
 
-                    @Override
-                    public void onFailed(AppUpdaterError error) {
-                        Log.d("AppUpdater Error", "Something went wrong");
-                    }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-        appUpdaterUtils.start();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put( "Content-Type", "application/json" );
+                return headers;
+            }
+
+        };
+
+        requestQueue.add( jsonObjectRequest );
 
 
 
