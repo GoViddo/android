@@ -13,7 +13,7 @@ public class LoginUserDetails {
 
 
 
-    public LoginUserDetails(TransactionFragment context) {
+    public LoginUserDetails(Context context) {
         this.mContext = context;
         mSharedPreferences = mContext.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
     }

@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add( jsonObjectRequest );
 
 
-        mLoginUserDetails = new LoginUserDetails(this);
+        mLoginUserDetails = new LoginUserDetails(MainActivity.this);
 
 
         if (mLoginUserDetails.getEmail() != "")

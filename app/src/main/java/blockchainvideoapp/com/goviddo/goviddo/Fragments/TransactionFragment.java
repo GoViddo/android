@@ -48,7 +48,7 @@ public class TransactionFragment extends Fragment {
 
     private RecyclerAdapterTransaction mRecyclerAdapterTransaction;
     private ArrayList <TransactionRecyclerModel> mRecyclerModelsTransaction;
-
+    LoginUserDetails loginUserDetail;
     LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), HORIZONTAL, false);
 
     @Override
@@ -63,14 +63,13 @@ public class TransactionFragment extends Fragment {
 
         mRecyclerViewTransaction.setLayoutManager(mLayoutManager);
         mRecyclerViewTransaction.setHasFixedSize(true);
-
-        LoginUserDetails loginUserDetails = new LoginUserDetails(TransactionFragment.this);
+        loginUserDetail = new LoginUserDetails(getActivity());
 
         JSONObject params = new JSONObject();
         try {
 
 
-            params.put("email", loginUserDetails.getEmail());
+            params.put("email", loginUserDetail.getEmail());
 
 
         } catch (JSONException e) {
