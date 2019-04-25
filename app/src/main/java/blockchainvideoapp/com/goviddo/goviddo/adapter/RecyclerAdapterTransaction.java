@@ -1,6 +1,8 @@
 package blockchainvideoapp.com.goviddo.goviddo.adapter;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,14 +38,6 @@ public class RecyclerAdapterTransaction extends   RecyclerView.Adapter<RecyclerA
         mViewHolder.recyclerView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-        SubscriptionCardLoadData.setSubscription_id(mSubscriptionrecyclerModels.get(mViewHolder.getPosition()).getmVideoId());
-        FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
-
-        SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-        transaction = transaction.replace( R.id.fragment_container, subscriptionFragment );
-        transaction.commit();
 
             }
         } );

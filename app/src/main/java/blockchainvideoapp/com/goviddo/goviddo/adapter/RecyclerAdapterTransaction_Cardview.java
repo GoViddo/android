@@ -38,18 +38,6 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
 
         final RecyclerAdapterTransaction_Cardview.MyViewHolder mViewHolder = new RecyclerAdapterTransaction_Cardview.MyViewHolder(view);
 
-
-        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(  mViewHolder.context, OnlinePlayerActivity.class );
-                mViewHolder.context.startActivity(intent );
-               // Utils.vdociper_id = mSubscriptionrecyclerModels.get(mViewHolder.getPosition()).getmVdoCipherId();
-
-            }
-        });
-
-
         // inflate your custom row layout here
         return mViewHolder;
     }
@@ -58,11 +46,6 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
     public void onBindViewHolder(final RecyclerAdapterTransaction_Cardview.MyViewHolder holder, int position) {
 
         mPosition = position;
-
-        holder.title.setText( mSubscriptionrecyclerModels.get( mPosition ).getmShortenText() );
-        Picasso.with(holder.context).load(mSubscriptionrecyclerModels.get(holder.getPosition()).getmSliderImage()).into(holder.imageView);
-
-
     }
 
 
@@ -73,21 +56,19 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         // view this our custom row layout, so intialize your variables here
-        TextView title;
-        TextView Description;
-        ImageView imageView;
-        CardView cardView;
+        TextView mDate;
+        TextView Description,mAmount;
         Context context;
 
         MyViewHolder(View view) {
             super(view);
 
 
-            imageView = view.findViewById( R.id.VideoLikedToPlay);
+
             context = view.getContext();
-            title = view.findViewById( R.id.txtShowTitle );
-            Description=view.findViewById( R.id.txtShowDesc );
-            cardView = view.findViewById(R.id.cardview_Subscription);
+            mDate = view.findViewById( R.id.txt_view_date );
+            Description=view.findViewById( R.id.txtviewfor );
+            mAmount = view.findViewById( R.id.txt_view_amount );
 
         }
 
