@@ -81,7 +81,7 @@
         android:layout_marginRight="@dimen/ten_dp"
         android:layout_weight="1"
         android:gravity="right"
-        android:text="$ 60.00"
+        android:id="@+id/txtbalance"
         android:textColor="@color/normalTextColor"
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold" />
@@ -229,11 +229,7 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/card_view_transaction">
-    </android.support.v7.widget.CardView>
+
   </LinearLayout>
 
 </LinearLayout>
