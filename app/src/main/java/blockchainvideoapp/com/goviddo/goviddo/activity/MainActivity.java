@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    AlertDialog.Builder builder1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,20 @@ public class MainActivity extends AppCompatActivity {
         String update_url = "http://178.128.173.51:3000/updateApp";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this );
+        builder1 = new AlertDialog.Builder(MainActivity.this);
+        builder1.setTitle( "Update Available" );
+        builder1.setPositiveButton(
+                "Update",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                        }
+                    }
+                });
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, update_url,  new Response.Listener<JSONObject>() {
@@ -106,23 +121,9 @@ public class MainActivity extends AppCompatActivity {
                     String update_info = response.getString("update_info");
                     String update_date = response.getString("update_date");
 
-                    if(BuildConfig.VERSION_CODE <version_code_current){
+                    if(BuildConfig.VERSION_CODE < version_code_current){
 
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-                        builder1.setTitle( Html.fromHtml("<font color='#FF0000'>Update Available</font>") );
                         builder1.setMessage(update_info);
-                        builder1.setPositiveButton(
-                                "Update",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                                        try {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                                        } catch (android.content.ActivityNotFoundException anfe) {
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                                        }
-                                    }
-                                });
 
                         AlertDialog alert11 = builder1.create();
                         alert11.show();
@@ -130,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                         Button positiveButton = alert11.getButton(AlertDialog.BUTTON_POSITIVE);
                         positiveButton.setTextColor( Color.parseColor("#FF0000"));
 
+                    }
+                    else{
 
                     }
 
