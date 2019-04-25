@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/cardview_trans"
+    android:layout_margin="3dp"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
     android:orientation="horizontal">
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,24 +20,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textSize="@dimen/normal_text_size"
+        android:textSize="18dp"
+        android:textColor="#000000"
         android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtviewfor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#607d8b"
             android:text="For"
-            android:textSize="10dp"/>
+            android:textSize="9dp"/>
     </LinearLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_weight="1">
     <TextView
         android:id="@+id/txt_view_amount"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Amount"
-        android:textSize="@dimen/normal_text_size"
+        android:textColor="#ff0000"
+        android:textSize="18dp"
         android:textStyle="bold" />
+</LinearLayout>
 </LinearLayout>
 
 </android.support.v7.widget.CardView>

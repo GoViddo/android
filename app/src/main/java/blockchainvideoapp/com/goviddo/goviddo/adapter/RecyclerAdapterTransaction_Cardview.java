@@ -34,7 +34,7 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
     public RecyclerAdapterTransaction_Cardview.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 
-        View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.recycleview_subscribe_cardvideo, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.card_view_fragment, parent, false);
 
         final RecyclerAdapterTransaction_Cardview.MyViewHolder mViewHolder = new RecyclerAdapterTransaction_Cardview.MyViewHolder(view);
 
@@ -46,6 +46,8 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
     public void onBindViewHolder(final RecyclerAdapterTransaction_Cardview.MyViewHolder holder, int position) {
 
         mPosition = position;
+
+
         holder.mAmount.setText( mTransactionRecyclerModel.get( holder.getPosition() ).getmTransaction_amount() );
         holder.mDate.setText( mTransactionRecyclerModel.get( holder.getPosition() ).getmTransaction_date() );
         holder.Description.setText( mTransactionRecyclerModel.get( holder.getPosition() ).getmTransaction_memo() );
@@ -62,12 +64,12 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
         TextView mDate;
         TextView Description,mAmount;
         Context context;
-
+        CardView cardView;
         MyViewHolder(View view) {
             super(view);
 
 
-
+            cardView = view.findViewById( R.id.cardview_trans );
             context = view.getContext();
             mDate = view.findViewById( R.id.txt_view_date );
             Description=view.findViewById( R.id.txtviewfor );

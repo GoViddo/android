@@ -1,6 +1,5 @@
 package blockchainvideoapp.com.goviddo.goviddo.Fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -22,23 +19,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
-import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscription;
-import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscriptionCard;
-import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterTransaction;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterTransaction_Cardview;
-import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdaptorListRecent;
-import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdaptorRecent;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
-import blockchainvideoapp.com.goviddo.goviddo.coreclass.RecentRecyclerModel;
-import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionCardLoadData;
-import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionRecyclerModel;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.TransactionRecyclerModel;
 
 import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
+import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 public class TransactionFragment extends Fragment {
 
@@ -50,7 +38,7 @@ public class TransactionFragment extends Fragment {
     private RecyclerAdapterTransaction_Cardview mRecyclerAdapterTransaction;
     private ArrayList <TransactionRecyclerModel> mRecyclerModelsTransaction;
     LoginUserDetails loginUserDetail;
-    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), HORIZONTAL, false);
+    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), VERTICAL, false);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
