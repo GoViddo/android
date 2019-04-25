@@ -3,6 +3,8 @@ package blockchainvideoapp.com.goviddo.goviddo.coreclass;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import blockchainvideoapp.com.goviddo.goviddo.Fragments.TransactionFragment;
+
 public class LoginUserDetails {
 
     SharedPreferences mSharedPreferences;
@@ -11,7 +13,7 @@ public class LoginUserDetails {
 
 
 
-    public LoginUserDetails(Context context) {
+    public LoginUserDetails(TransactionFragment context) {
         this.mContext = context;
         mSharedPreferences = mContext.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
     }

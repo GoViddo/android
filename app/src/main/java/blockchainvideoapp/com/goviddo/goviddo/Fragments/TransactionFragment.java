@@ -2,6 +2,7 @@ package blockchainvideoapp.com.goviddo.goviddo.Fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscription;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscriptionCard;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterTransaction;
@@ -35,7 +37,9 @@ import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionCardLoadData
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionRecyclerModel;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.TransactionRecyclerModel;
 
-public class TransactionFragment extends Activity {
+import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
+
+public class TransactionFragment extends Fragment {
 
     public TransactionFragment() {
     }
@@ -45,29 +49,22 @@ public class TransactionFragment extends Activity {
     private RecyclerAdapterTransaction mRecyclerAdapterTransaction;
     private ArrayList <TransactionRecyclerModel> mRecyclerModelsTransaction;
 
-    LinearLayoutManager mLayoutManager;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), HORIZONTAL, false);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_transaction, container, false);
+        View view = inflater.inflate( R.layout.fragment_transaction, container, false);
 
 
         String url = "http://178.128.173.51:3000/transactionDetails";
 
         mRecyclerViewTransaction = view.findViewById(R.id.recycle_transaction);
 
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
         mRecyclerViewTransaction.setLayoutManager(mLayoutManager);
         mRecyclerViewTransaction.setHasFixedSize(true);
 
-        LoginUserDetails loginUserDetails = new LoginUserDetails(this);
+        LoginUserDetails loginUserDetails = new LoginUserDetails(TransactionFragment.this);
 
         JSONObject params = new JSONObject();
         try {
@@ -122,7 +119,7 @@ public class TransactionFragment extends Activity {
             }
         });
 
-        Volley.newRequestQueue(this).add(jsonArrayRequest);
+        Volley.newRequestQueue(getActivity()).add(jsonArrayRequest);
         return view;
 
     }
