@@ -29,6 +29,7 @@ import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscription;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterSubscriptionCard;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterTransaction;
+import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterTransaction_Cardview;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdaptorListRecent;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdaptorRecent;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
@@ -46,7 +47,7 @@ public class TransactionFragment extends Fragment {
 
     RecyclerView mRecyclerViewTransaction;
 
-    private RecyclerAdapterTransaction mRecyclerAdapterTransaction;
+    private RecyclerAdapterTransaction_Cardview mRecyclerAdapterTransaction;
     private ArrayList <TransactionRecyclerModel> mRecyclerModelsTransaction;
     LoginUserDetails loginUserDetail;
     LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), HORIZONTAL, false);
@@ -99,7 +100,7 @@ public class TransactionFragment extends Fragment {
 
 
                         mRecyclerModelsTransaction.add(new TransactionRecyclerModel(transaction_amount, transaction_memo, transaction_date));
-                        mRecyclerAdapterTransaction = new RecyclerAdapterTransaction(mRecyclerModelsTransaction);
+                        mRecyclerAdapterTransaction = new RecyclerAdapterTransaction_Cardview(mRecyclerModelsTransaction);
                         mRecyclerViewTransaction.setAdapter(mRecyclerAdapterTransaction);
                         mRecyclerAdapterTransaction.notifyDataSetChanged();
 

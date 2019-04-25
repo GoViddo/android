@@ -22,12 +22,12 @@ import blockchainvideoapp.com.goviddo.goviddo.vdocipher.Utils;
 
 public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<RecyclerAdapterTransaction_Cardview.MyViewHolder> {
 
-    private ArrayList<TransactionRecyclerModel> mSubscriptionrecyclerModels; // this data structure carries our title and description
+    private ArrayList<TransactionRecyclerModel> mTransactionRecyclerModel; // this data structure carries our title and description
 
     int mPosition;
 
     public RecyclerAdapterTransaction_Cardview(ArrayList<TransactionRecyclerModel> recyclerModels) {
-        this.mSubscriptionrecyclerModels = recyclerModels;
+        this.mTransactionRecyclerModel = recyclerModels;
     }
 
     @Override
@@ -46,12 +46,15 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
     public void onBindViewHolder(final RecyclerAdapterTransaction_Cardview.MyViewHolder holder, int position) {
 
         mPosition = position;
+        holder.mAmount.setText( mTransactionRecyclerModel.get( holder.getPosition() ).getmTransaction_amount() );
+        holder.mDate.setText( mTransactionRecyclerModel.get( holder.getPosition() ).getmTransaction_date() );
+        holder.Description.setText( mTransactionRecyclerModel.get( holder.getPosition() ).getmTransaction_memo() );
     }
 
 
     @Override
     public int getItemCount() {
-        return mSubscriptionrecyclerModels.size();
+        return mTransactionRecyclerModel.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

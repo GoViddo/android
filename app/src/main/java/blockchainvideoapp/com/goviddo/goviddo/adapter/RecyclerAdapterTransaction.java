@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import blockchainvideoapp.com.goviddo.goviddo.Fragments.TransactionFragment;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.TransactionRecyclerModel;
 
@@ -30,18 +31,9 @@ public class RecyclerAdapterTransaction extends   RecyclerView.Adapter<RecyclerA
     public RecyclerAdapterTransaction.MyViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
 
 
-        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.fragment_transaction, parent, false );
+        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.card_view_fragment, parent, false );
 
         final RecyclerAdapterTransaction.MyViewHolder mViewHolder = new RecyclerAdapterTransaction.MyViewHolder( view );
-
-
-        mViewHolder.recyclerView.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        } );
-
 
         // inflate your custom row layout here
         return mViewHolder;
@@ -54,6 +46,7 @@ public class RecyclerAdapterTransaction extends   RecyclerView.Adapter<RecyclerA
 
         //   Picasso.with(holder.context).load(mSubscriptionrecyclerModels.get(holder.getPosition()).getmSliderImage()).into(holder.roundedImageView);
 
+        holder.mtxt_lst_acc_bal.setText( mTransactionRecyclerModel.get( holder.getPosition() ).getmTransaction_amount() );
 
     }
 
@@ -77,7 +70,7 @@ public class RecyclerAdapterTransaction extends   RecyclerView.Adapter<RecyclerA
             roundedImageView = view.findViewById( R.id.profile_image );
             mtxtUserName = view.findViewById( R.id.txtUserName );
             mtxtbalance = view.findViewById( R.id.txtbalance );
-           mtxt_total_investment = view.findViewById( R.id.txt_total_investment );
+            mtxt_total_investment = view.findViewById( R.id.txt_total_investment );
             mtxt_lst_transaction= view.findViewById( R.id.txt_lst_transaction );
             mtxt_total_earning  = view.findViewById( R.id.txt_total_earning );
             mtxt_lst_acc_bal = view.findViewById( R.id.txt_lst_acc_bal );
