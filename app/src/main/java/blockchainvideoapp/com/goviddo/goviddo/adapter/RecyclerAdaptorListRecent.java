@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.Fragments.HomeFragment;
 import blockchainvideoapp.com.goviddo.goviddo.Fragments.OthersFragment;
+import blockchainvideoapp.com.goviddo.goviddo.Fragments.TransactionFragment;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.RecentRecyclerModel;
 
@@ -56,6 +57,18 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
                     OthersFragment othersFragment = new OthersFragment();
                     transaction.replace( R.id.fragment_container,othersFragment );
                     transaction.addToBackStack("OtherFragments");
+                    transaction.commit();
+
+                }
+
+                if (mViewHolder.textView.getText().toString().equalsIgnoreCase("Transaction"))
+                {
+
+
+                    FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
+                    TransactionFragment transactionFragment = new TransactionFragment();
+                    transaction.replace( R.id.fragment_container, transactionFragment );
+                    transaction.addToBackStack("TransactionFragments");
                     transaction.commit();
 
                 }
