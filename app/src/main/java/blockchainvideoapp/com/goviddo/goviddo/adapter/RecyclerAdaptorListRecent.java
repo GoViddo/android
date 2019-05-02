@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import blockchainvideoapp.com.goviddo.goviddo.Fragments.HomeFragment;
 import blockchainvideoapp.com.goviddo.goviddo.Fragments.OthersFragment;
 import blockchainvideoapp.com.goviddo.goviddo.Fragments.TransactionFragment;
+import blockchainvideoapp.com.goviddo.goviddo.Fragments.WatchLaterFragment;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.RecentRecyclerModel;
 
@@ -72,9 +73,14 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
                     transaction.commit();
 
                 }
+                
                 if (mViewHolder.textView.getText().toString().equalsIgnoreCase("Watch Later"))
                 {
-
+                    FragmentTransaction transaction = ((AppCompatActivity)mViewHolder.context).getSupportFragmentManager().beginTransaction();
+                    WatchLaterFragment watchLaterFragment= new WatchLaterFragment();
+                    transaction.replace( R.id.fragment_container, watchLaterFragment );
+                    transaction.addToBackStack("WatchLaterFragment");
+                    transaction.commit();
                 }
 
             }
