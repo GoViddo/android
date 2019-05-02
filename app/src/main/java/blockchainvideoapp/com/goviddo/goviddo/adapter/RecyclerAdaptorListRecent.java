@@ -72,6 +72,10 @@ public class RecyclerAdaptorListRecent extends RecyclerView.Adapter<RecyclerAdap
                     transaction.commit();
 
                 }
+                if (mViewHolder.textView.getText().toString().equalsIgnoreCase("Watch Later"))
+                {
+
+                }
 
             }
         });
