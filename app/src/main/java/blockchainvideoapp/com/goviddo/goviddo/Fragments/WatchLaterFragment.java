@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterTransaction_Cardview;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterWatchLater;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
-import blockchainvideoapp.com.goviddo.goviddo.coreclass.TransactionRecyclerModel;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.WatchLaterRecyclerModel;
-
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 public class WatchLaterFragment extends Fragment{
@@ -83,12 +81,9 @@ public class WatchLaterFragment extends Fragment{
                         JSONObject jsonObject = data.getJSONObject(i);
 
 
-                        String transaction_amount = jsonObject.getString("transaction_amount");
-                        String transaction_memo = jsonObject.getString("transaction_memo");
-                        String transaction_date = jsonObject.getString("transaction_date");
 
 
-                        mRecyclerModelsWatchLater.add(new TransactionRecyclerModel(transaction_amount, transaction_memo, transaction_date));
+                        mRecyclerModelsWatchLater.add(new WatchLaterRecyclerModel());
                         mRecyclerAdapterWatchLater = new RecyclerAdapterTransaction_Cardview(mRecyclerModelsWatchLater);
                         mRecyclerViewWatchLater.setAdapter(mRecyclerAdapterWatchLater);
                         mRecyclerAdapterWatchLater.notifyDataSetChanged();
