@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.SubscriptionRecyclerModel;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.TransactionRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.coreclass.WatchLaterRecyclerModel;
 import blockchainvideoapp.com.goviddo.goviddo.vdocipher.OnlinePlayerActivity;
 import blockchainvideoapp.com.goviddo.goviddo.vdocipher.Utils;
 
@@ -29,6 +30,7 @@ public class RecyclerAdapterTransaction_Cardview  extends RecyclerView.Adapter<R
     public RecyclerAdapterTransaction_Cardview(ArrayList<TransactionRecyclerModel> recyclerModels) {
         this.mTransactionRecyclerModel = recyclerModels;
     }
+
 
     @Override
     public RecyclerAdapterTransaction_Cardview.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

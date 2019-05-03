@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.WatchLaterRecyclerModel;
 
 public class RecyclerAdapterWatchLater extends RecyclerView.Adapter<RecyclerAdapterWatchLater.MyViewHolder> {

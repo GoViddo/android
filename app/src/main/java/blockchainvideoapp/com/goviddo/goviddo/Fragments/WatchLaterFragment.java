@@ -20,11 +20,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterTransaction_Cardview;
 import blockchainvideoapp.com.goviddo.goviddo.adapter.RecyclerAdapterWatchLater;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.LoginUserDetails;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.WatchLaterRecyclerModel;
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
+
+
+
+
 
 public class WatchLaterFragment extends Fragment{
 
@@ -42,12 +47,12 @@ public class WatchLaterFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.fragment_transaction, container, false);
+        View view = inflater.inflate( R.layout.fragment_watchlater, container, false);
 
 
         String url = "http://178.128.173.51:3000/transactionDetails";
 
-        mRecyclerViewWatchLater = view.findViewById(R.id.recycle_transaction);
+        mRecyclerViewWatchLater = view.findViewById( R.id.recycle_watchlater);
 
         mRecyclerViewWatchLater.setLayoutManager(mLayoutManager);
         mRecyclerViewWatchLater.setHasFixedSize(true);
@@ -81,13 +86,6 @@ public class WatchLaterFragment extends Fragment{
                         JSONObject jsonObject = data.getJSONObject(i);
 
 
-
-
-                        mRecyclerModelsWatchLater.add(new WatchLaterRecyclerModel());
-                        mRecyclerAdapterWatchLater = new RecyclerAdapterTransaction_Cardview(mRecyclerModelsWatchLater);
-                        mRecyclerViewWatchLater.setAdapter(mRecyclerAdapterWatchLater);
-                        mRecyclerAdapterWatchLater.notifyDataSetChanged();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -115,4 +113,4 @@ public class WatchLaterFragment extends Fragment{
 
 
 
-}
+

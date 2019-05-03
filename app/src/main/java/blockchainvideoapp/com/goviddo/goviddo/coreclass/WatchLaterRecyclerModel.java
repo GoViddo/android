@@ -1,5 +1,7 @@
 package blockchainvideoapp.com.goviddo.goviddo.coreclass;
 
+import java.util.ArrayList;
+
 public class WatchLaterRecyclerModel {
     public String mImageUrl,mVideoTitle,mVideoDesc;
     private int mVideoId;
@@ -10,6 +12,8 @@ public class WatchLaterRecyclerModel {
         this.mVideoDesc = mVideoDesc;
         this.mVideoId = mVideoId;
     }
+
+
 
     public String getmImageUrl() {
         return mImageUrl;

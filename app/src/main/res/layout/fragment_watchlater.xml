@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/twenty_dp"
-    android:paddingTop="@dimen/ten_dp"
-    android:paddingBottom="@dimen/ten_dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/white" android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My List"
-        android:textColor="@color/changeTextColor"
-        android:textSize="14dp"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:id="@+id/recycle_watchlater">
 
-    </android.support.v7.widget.RecyclerView>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" android:padding="@dimen/ten_dp"
+        android:text="My List" android:textColor="@color/changeTextColor"
+        android:textSize="@dimen/normal_text_size"
+        android:textStyle="bold"/>
 
+    <android.support.v7.widget.RecyclerView android:id="@+id/recycle_watchlater"
+        android:layout_width="match_parent" android:layout_height="wrap_content"/>
 </LinearLayout>
