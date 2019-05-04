@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -50,7 +51,7 @@ public class WatchLaterFragment extends Fragment{
         View view = inflater.inflate( R.layout.fragment_watchlater, container, false);
 
 
-        String url = "http://178.128.173.51:3000/transactionDetails";
+        String url = "http://178.128.173.51:3000/watchLaterList";
 
         mRecyclerViewWatchLater = view.findViewById( R.id.recycle_watchlater);
 
@@ -85,6 +86,13 @@ public class WatchLaterFragment extends Fragment{
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject jsonObject = data.getJSONObject(i);
 
+                        String home_image = response.getString( "home_image" );
+                        String vdoCipherId = response.getString("vdoCipherId");
+                        String videoName = response.getString(  "videoName") ;
+                        mRecyclerModelsWatchLater.add(new WatchLaterRecyclerModel(videoName,vdoCipherId,home_image));
+                        mRecyclerAdapterWatchLater = new RecyclerAdapterWatchLater(mRecyclerModelsWatchLater);
+                        mRecyclerViewWatchLater.setAdapter(mRecyclerAdapterWatchLater);
+                        mRecyclerAdapterWatchLater.notifyDataSetChanged();
 
                     }
                 } catch (JSONException e) {
@@ -97,7 +105,7 @@ public class WatchLaterFragment extends Fragment{
             public void onErrorResponse(VolleyError error) {
                 // volley finished and returned network error, update and unlock  itShouldLoadMore
 
-                //Toast.makeText( getContext(), "network error!", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( getContext(), "network error!", Toast.LENGTH_SHORT ).show();
             }
         });
 

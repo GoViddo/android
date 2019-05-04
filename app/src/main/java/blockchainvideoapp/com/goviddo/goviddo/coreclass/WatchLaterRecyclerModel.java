@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 public class WatchLaterRecyclerModel {
     public String mImageUrl,mVideoTitle,mVideoDesc;
-    private int mVideoId;
+    private String mVideoId;
 
-    public WatchLaterRecyclerModel(String mImageUrl, String mVideoTitle, String mVideoDesc, int mVideoId) {
+    public WatchLaterRecyclerModel( String mVideoTitle, String mVideoId,String mImageUrl) {
         this.mImageUrl = mImageUrl;
         this.mVideoTitle = mVideoTitle;
-        this.mVideoDesc = mVideoDesc;
         this.mVideoId = mVideoId;
     }
 
@@ -39,11 +38,11 @@ public class WatchLaterRecyclerModel {
         this.mVideoDesc = mVideoDesc;
     }
 
-    public int getmVideoId() {
+    public String getmVideoId() {
         return mVideoId;
     }
 
-    public void setmVideoId(int mVideoId) {
+    public void setmVideoId(String mVideoId) {
         this.mVideoId = mVideoId;
     }
 }

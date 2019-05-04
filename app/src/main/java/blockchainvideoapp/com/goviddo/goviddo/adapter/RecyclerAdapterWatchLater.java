@@ -1,6 +1,7 @@
 package blockchainvideoapp.com.goviddo.goviddo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import blockchainvideoapp.com.goviddo.goviddo.R;
 import blockchainvideoapp.com.goviddo.goviddo.coreclass.WatchLaterRecyclerModel;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.OnlinePlayerActivity;
+import blockchainvideoapp.com.goviddo.goviddo.vdocipher.Utils;
 
 public class RecyclerAdapterWatchLater extends RecyclerView.Adapter<RecyclerAdapterWatchLater.MyViewHolder> {
 
@@ -33,15 +38,27 @@ public class RecyclerAdapterWatchLater extends RecyclerView.Adapter<RecyclerAdap
 
         final RecyclerAdapterWatchLater.MyViewHolder mViewHolder = new RecyclerAdapterWatchLater.MyViewHolder(view);
 
+
+        mViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(  mViewHolder.context, OnlinePlayerActivity.class );
+                mViewHolder.context.startActivity(intent );
+                Utils.vdociper_id = mWatchLaterRecyclerModel.get(mViewHolder.getPosition()).getmVideoId();
+
+            }
+        });
         // inflate your custom row layout here
         return mViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerAdapterWatchLater.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         mPosition = position;
 
+        Picasso.with(holder.context).load(mWatchLaterRecyclerModel.get(holder.getPosition()).getmImageUrl()).into(holder.imageView);
+        holder.textViewVideoTitle.setText( mWatchLaterRecyclerModel.get( holder.getPosition() ).getmVideoTitle() );
 
     }
 
@@ -67,7 +84,7 @@ public class RecyclerAdapterWatchLater extends RecyclerView.Adapter<RecyclerAdap
             context = view.getContext();
             imageView = view.findViewById(R.id.img_watchlater);
             textViewVideoTitle = view.findViewById(R.id.title_watchlater);
-            textViewVideoDesc = view.findViewById(R.id.desc_watchlater);
+          //  textViewVideoDesc = view.findViewById(R.id.desc_watchlater);
 
 
         }
