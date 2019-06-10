@@ -145,7 +145,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         final RequestQueue requestQueueForBannerImages = Volley.newRequestQueue(getActivity());
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, configuration_url,  new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, configuration_url, null,  new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 

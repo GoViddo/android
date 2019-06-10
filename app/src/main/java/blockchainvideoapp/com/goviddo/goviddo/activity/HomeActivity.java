@@ -106,7 +106,7 @@ public class HomeActivity extends AppCompatActivity  {
         RequestQueue requestQueue = Volley.newRequestQueue(this );
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, update_url,  new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.GET, update_url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 System.out.println(response);

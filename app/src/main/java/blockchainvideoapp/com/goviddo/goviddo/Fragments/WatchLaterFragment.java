@@ -86,9 +86,9 @@ public class WatchLaterFragment extends Fragment{
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject jsonObject = data.getJSONObject(i);
 
-                        String home_image = response.getString( "home_image" );
-                        String vdoCipherId = response.getString("vdoCipherId");
-                        String videoName = response.getString(  "videoName") ;
+                        String home_image = jsonObject.getString( "home_image" );
+                        String vdoCipherId = jsonObject.getString("vdoCipherId");
+                        String videoName = jsonObject.getString(  "videoName") ;
                         mRecyclerModelsWatchLater.add(new WatchLaterRecyclerModel(videoName,vdoCipherId,home_image));
                         mRecyclerAdapterWatchLater = new RecyclerAdapterWatchLater(mRecyclerModelsWatchLater);
                         mRecyclerViewWatchLater.setAdapter(mRecyclerAdapterWatchLater);
